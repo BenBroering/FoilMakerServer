@@ -37,7 +37,6 @@ public class ClientHandler implements  Runnable{
                 String[] tokens = new String[message.split("--").length-1];
                 int i = 0;
                 for(String token : message.split("--")){
-                    System.out.println(token + " " + messageType);
                     if(!token.equals(messageType)){
                         tokens[i] = token;
                         i++;
@@ -50,12 +49,17 @@ public class ClientHandler implements  Runnable{
                  * Read messages and do stuff with them.
                  * Implement functionality in IOUtility class.
                  */
-                String returnMessage = "ERROR";
+                String returnMessage;
                 if(messageType.equals("CREATENEWUSER")){
                     returnMessage = IOUtility.createNewUser(tokens[0],tokens[1]);
-
+                    out.println(returnMessage);
                 }
-                out.println(returnMessage);
+
+                if(messageType.equals("LOGIN")){
+                    returnMessage = IOUtility.login(tokens[0],tokens[1]);
+                    out.println(returnMessage);
+                }
+
 
                 //
 

@@ -1,11 +1,14 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by Ben on 11/29/2016.
  */
 public class FoilMakerServer {
+
+    private static ArrayList<String> loggedInUsers = new ArrayList<>();
 
     public static void main(String[] args) throws IOException{
 
@@ -21,5 +24,12 @@ public class FoilMakerServer {
             ClientHandler newUser = new ClientHandler(socket);
             newUser.run();
         }
+    }
+
+    public static void userLogin(String userCookie){
+        loggedInUsers.add(userCookie);
+    }
+    public static void userLogout(String userCookie){
+        loggedInUsers.remove(userCookie);
     }
 }
