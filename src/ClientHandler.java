@@ -66,6 +66,7 @@ public class ClientHandler implements  Runnable{
 
                 if(messageType.equals("LOGOUT")){
                     FoilMakerServer.userLogout(userInfo);
+                    
                     //out.println(returnMessage);
                 }
 
@@ -76,6 +77,13 @@ public class ClientHandler implements  Runnable{
                  * Implement case/switch or if statements here.
                  * Errors in the syntax will need to be checked.
                  */
+                
+                //Recieve from leader that group is complete
+                if(messageType.equals("ALLPARTICIPANTSHAVEJOINED")){
+                    
+                    //out.println(returnMessage);
+                }
+                
                 System.out.println("EYY!");
             }
 
