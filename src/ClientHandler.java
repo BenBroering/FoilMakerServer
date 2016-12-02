@@ -103,8 +103,6 @@ public class ClientHandler implements  Runnable{
                     else{
                         out.println(returnMessage);
                     }
-                    
-                    //out.println(returnMessage);
                 }
                 
                 System.out.println("EYY!");
