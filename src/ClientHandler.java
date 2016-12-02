@@ -80,6 +80,29 @@ public class ClientHandler implements  Runnable{
                 
                 //Recieve from leader that group is complete
                 if(messageType.equals("ALLPARTICIPANTSHAVEJOINED")){
+                	String playerToken = tokens[0];
+                    String gameToken = tokens[1];
+                    
+                    returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.ALLPARTICIPANTSHAVEJOINED;
+                    //Check if user token is valid
+                    if(false){
+                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
+                    	out.println(returnMessage);
+                    }
+                    //Check if game token is valid
+                    else if(false){
+                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
+                    	out.println(returnMessage);
+                    }
+                    //Check if user already playing the game.
+                    else if(false){
+                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTGAMELEADER;
+                    	out.println(returnMessage);
+                    }
+                    //tokens are good to go.
+                    else{
+                        out.println(returnMessage);
+                    }
                     
                     //out.println(returnMessage);
                 }
