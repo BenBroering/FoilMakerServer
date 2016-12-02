@@ -17,6 +17,7 @@ public class FoilMakerServer {
          *
          * We may keep a list of the connections later.
          */
+        System.out.println("Looking for connections...");
         ServerSocket listener = new ServerSocket(9999);
         while(true){
             Socket socket = listener.accept();
@@ -26,10 +27,17 @@ public class FoilMakerServer {
         }
     }
 
-    public static void userLogin(String userCookie){
-        loggedInUsers.add(userCookie);
+    public static void userLogin(String userInfo){
+        loggedInUsers.add(userInfo);
     }
-    public static void userLogout(String userCookie){
-        loggedInUsers.remove(userCookie);
+    public static void userLogout(String userInfo){
+        for(String user : loggedInUsers){
+            if(user.contains(userInfo)){
+                loggedInUsers.remove(userInfo);
+                return;
+            }
+
+        }
+
     }
 }

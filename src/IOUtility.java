@@ -99,7 +99,6 @@ public class IOUtility {
         for(int x = 0; x < 10; x++){
             char cookieChar = (char)(r.nextInt(25) + 65);
             int caps = r.nextInt(2);
-            System.out.println("CAPS VALUE: " + caps);
             if(caps == 0)
                 cookieChar = Character.toLowerCase(cookieChar);
 
@@ -140,7 +139,7 @@ public class IOUtility {
         }
     }
 
-    public static String login(String username, String password) throws IOException{
+    public static String login(String username, String password, ClientHandler client) throws IOException{
         if(username == null || password == null){
             return "RESPONSE--CREATENEWUSER--INVALIDMESSAGEFORMAT";
         }
@@ -151,7 +150,6 @@ public class IOUtility {
             String loginAttempt = "xxx:xxx";
             for(String user : users){
                 if(user.split(":")[0].equals(username)){
-
                     userFound = true;
                     loginAttempt = user;
                 }
@@ -160,13 +158,15 @@ public class IOUtility {
             if(!userFound)
                 return "RESPONSE--LOGIN--UNKNOWNUSER";
 
-            
+
             if(password.equals(loginAttempt.split(":")[1])){
                 String cookie = generateCookie();
-                FoilMakerServer.userLogin(cookie);
+                String userInfo = loginAttempt + ":" + cookie;
+                client.setUserInfo(userInfo);
+                FoilMakerServer.userLogin(userInfo);
                 return "RESPONSE--LOGIN--SUCCESS--" + cookie;
             }else {
-                return "RESPOMSE--LOGIN--INVALIDUSERPASSWORD";
+                return "RESPONSE--LOGIN--INVALIDUSERPASSWORD";
             }
 
 

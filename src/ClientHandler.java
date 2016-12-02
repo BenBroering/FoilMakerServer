@@ -7,6 +7,10 @@ import java.net.Socket;
 public class ClientHandler implements  Runnable{
 
     private Socket socket;
+    private String userInfo;
+    private String username;
+    private String password;
+    private String cookie;
 
     public ClientHandler(Socket socket){
         this.socket = socket;
@@ -25,7 +29,7 @@ public class ClientHandler implements  Runnable{
                  */
 
                 // Wait for a message, then save the massage and it's tokens.
-                String message = "";
+                String message;
                 if (in.ready()){
                     message = in.readLine();
                     System.out.println("Message \"" + message + "\" recieved!");
@@ -56,8 +60,13 @@ public class ClientHandler implements  Runnable{
                 }
 
                 if(messageType.equals("LOGIN")){
-                    returnMessage = IOUtility.login(tokens[0],tokens[1]);
+                    returnMessage = IOUtility.login(tokens[0],tokens[1],this);
                     out.println(returnMessage);
+                }
+
+                if(messageType.equals("LOGOUT")){
+                    FoilMakerServer.userLogout(userInfo);
+                    //out.println(returnMessage);
                 }
 
 
@@ -73,5 +82,12 @@ public class ClientHandler implements  Runnable{
         }catch (IOException e){
             System.out.println("IO ERROR!");
         }
+    }
+
+    public void setUserInfo(String userInfo){
+        this.userInfo = userInfo;
+        this.username = userInfo.split(":")[0];
+        this.password = userInfo.split(":")[1];
+        this.cookie = userInfo.split(":")[2];
     }
 }
