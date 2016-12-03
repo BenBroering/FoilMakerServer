@@ -26,7 +26,9 @@ public class FoilMakerServer {
             newUser.run();
         }
     }
-
+    
+    
+    
     public static void userLogin(String userInfo){
         loggedInUsers.add(userInfo);
     }

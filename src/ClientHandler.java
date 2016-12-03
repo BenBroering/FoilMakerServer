@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by Ben on 11/29/2016.
@@ -106,7 +107,15 @@ public class ClientHandler implements  Runnable{
                     }
                 }
                 
-                //
+                //Game Round
+                ArrayList<String> words = IOUtility.getWords();
+                for(String word: words){
+                	String[] qa = word.split(" : ");
+                	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + qa[0] + "--" + qa[1];
+                	int totalPlayers , allSuggest = 0;
+                }
+                
+                
                 
                 
                 
