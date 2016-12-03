@@ -91,7 +91,7 @@ public class ClientHandler implements  Runnable{
                     }
                     
                     //Check if game token is valid
-                    else if(false){
+                    else if(IOUtility.isValidGameToken(gameToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
                     	out.println(returnMessage);
                     }

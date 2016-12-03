@@ -98,6 +98,9 @@ public class IOUtility {
     }
     
     public static boolean isValidUserToken(String userToken) throws IOException{
+    	if(userToken==null||userToken.length()!=10){
+    		return false;
+    	}
     	try{
     		in = new BufferedReader(new FileReader(userKeyFile));
 
@@ -115,6 +118,9 @@ public class IOUtility {
     }
     
     public static boolean isValidGameToken(String gameToken) throws IOException{
+    	if(gameToken==null||gameToken.length()!=3){
+    		return false;
+    	}
     	try{
     		in = new BufferedReader(new FileReader(gameKeyFile));
 
