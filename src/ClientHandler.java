@@ -85,7 +85,7 @@ public class ClientHandler implements  Runnable{
                     
                     returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.ALLPARTICIPANTSHAVEJOINED;
                     //Check if user token is valid
-                    if(false){
+                    if(IOUtility.isValidUserToken(userToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
                     	out.println(returnMessage);
                     }
