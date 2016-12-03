@@ -89,6 +89,7 @@ public class ClientHandler implements  Runnable{
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
                     	out.println(returnMessage);
                     }
+                    
                     //Check if game token is valid
                     else if(false){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
@@ -104,6 +105,10 @@ public class ClientHandler implements  Runnable{
                     	
                     }
                 }
+                
+                //
+                
+                
                 
                 System.out.println("EYY!");
             }

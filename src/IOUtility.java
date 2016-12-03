@@ -12,9 +12,11 @@ public class IOUtility {
 	private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
     private static File wordFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\WordleDeck");
     private static File userKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserTokenData");
+    private static File gameKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\GameTokenData");
 	//private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
     //private static File wordFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
     //private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
+    //private static File gameKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\GameTokenData");
     private static BufferedReader in = null;
     private static BufferedWriter out = null;
 
@@ -112,6 +114,23 @@ public class IOUtility {
     	}
     }
     
+    public static boolean isValidGameToken(String gameToken) throws IOException{
+    	try{
+    		in = new BufferedReader(new FileReader(gameKeyFile));
+
+            String user;
+            while ((user = in.readLine()) != null){
+                String key = user.split(":")[0];
+                if(gameToken.equals(key)){
+                	return true;
+                }
+            }
+            return false;
+    	} catch(IOException e){
+    		throw e;	
+    	}
+    }
+    
     public static String generateCookie(){
         String cookie = "";
         Random r = new Random();
@@ -157,7 +176,7 @@ public class IOUtility {
                 out.close();
         }
     }
-
+    
     public static String login(String username, String password, ClientHandler client) throws IOException{
         if(username == null || password == null){
             return "RESPONSE--CREATENEWUSER--INVALIDMESSAGEFORMAT";
