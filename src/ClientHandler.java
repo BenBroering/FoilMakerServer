@@ -80,7 +80,7 @@ public class ClientHandler implements  Runnable{
                 
                 //Recieve from leader that group is complete
                 if(messageType.equals("ALLPARTICIPANTSHAVEJOINED")){
-                	String playerToken = tokens[0];
+                	String userToken = tokens[0];
                     String gameToken = tokens[1];
                     
                     returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.ALLPARTICIPANTSHAVEJOINED;
@@ -99,9 +99,9 @@ public class ClientHandler implements  Runnable{
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTGAMELEADER;
                     	out.println(returnMessage);
                     }
-                    //tokens are good to go.
+                    //tokens are good to go. Start game
                     else{
-                        out.println(returnMessage);
+                    	
                     }
                 }
                 
