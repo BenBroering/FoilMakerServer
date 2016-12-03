@@ -102,7 +102,7 @@ public class ClientHandler implements  Runnable{
                     }
                     //tokens are good to go. Start game
                     else{
-                    	
+                    	//Method to start game.
                     }
                 }
                 
