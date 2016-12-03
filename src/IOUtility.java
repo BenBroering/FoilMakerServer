@@ -11,8 +11,10 @@ import java.util.Random;
 public class IOUtility {
 	private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
     private static File wordFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\WordleDeck");
+    private static File userKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserTokenData");
 	//private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
     //private static File wordFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
+    //private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
     private static BufferedReader in = null;
     private static BufferedWriter out = null;
 
@@ -92,7 +94,24 @@ public class IOUtility {
 
         return false;
     }
+    
+    public static boolean isValidUserToken(String userToken) throws IOException{
+    	try{
+    		in = new BufferedReader(new FileReader(userKeyFile));
 
+            String user;
+            while ((user = in.readLine()) != null){
+                String key = user.split(":")[1];
+                if(userToken.equals(key)){
+                	return true;
+                }
+            }
+            return false;
+    	} catch(IOException e){
+    		throw e;	
+    	}
+    }
+    
     public static String generateCookie(){
         String cookie = "";
         Random r = new Random();
@@ -158,11 +177,14 @@ public class IOUtility {
             if(!userFound)
                 return "RESPONSE--LOGIN--UNKNOWNUSER";
 
-
+            //Add file reader for userKey file.
             if(password.equals(loginAttempt.split(":")[1])){
                 String cookie = generateCookie();
                 String userInfo = loginAttempt + ":" + cookie;
                 client.setUserInfo(userInfo);
+                out = new BufferedWriter(new FileWriter(userKeyFile));
+                out.append("\n" + username+ ":" + cookie);
+                out.flush();
                 FoilMakerServer.userLogin(userInfo);
                 return "RESPONSE--LOGIN--SUCCESS--" + cookie;
             }else {
