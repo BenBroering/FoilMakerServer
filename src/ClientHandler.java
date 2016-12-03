@@ -112,7 +112,10 @@ public class ClientHandler implements  Runnable{
                 for(String word: words){
                 	String[] qa = word.split(" : ");
                 	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + qa[0] + "--" + qa[1];
-                	int totalPlayers , allSuggest = 0;
+                	int totalPlayers = FoilMakerServer.getNumUsers(), allSuggests = 0;
+                	do{
+                		
+                	}while(allSuggests<totalPlayers);
                 }
                 
                 

@@ -27,7 +27,9 @@ public class FoilMakerServer {
         }
     }
     
-    
+    public static int getNumUsers(){
+    	return loggedInUsers.size();
+    }
     
     public static void userLogin(String userInfo){
         loggedInUsers.add(userInfo);
