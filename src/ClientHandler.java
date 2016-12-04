@@ -168,6 +168,56 @@ public class ClientHandler implements  Runnable{
                 		returnMessage += "--" + suggestion;
                 	}
                 	out.println(returnMessage);
+                	ArrayList<String> playersAnswer = new ArrayList<String>();
+                	do{
+                		if (in.ready()){
+                            message = in.readLine();
+                            System.out.println("Message \"" + message + "\" recieved!");
+                        }else{
+                            continue;
+                        }
+                		messageType = message.split("--")[0];
+                		returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.PLAYERCHOICE;
+                		
+                		//Check if messageType is PLAYERSUGGESTION
+                		if(!messageType.equals("PLAYERCHOICE")){
+                			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.UNEXPECTEDMESSAGETYPE;
+                			out.println(returnMessage);
+                		
+                		} else{
+                			tokens = new String[message.split("--").length-1];
+                            i = 0;
+                            for(String token : message.split("--")){
+                                if(!token.equals(messageType)){
+                                    tokens[i] = token;
+                                    i++;
+                                }
+
+                            }
+                            String userToken = tokens[0];
+                            String gameToken = tokens[1];
+                            String choice = tokens[2];
+                            //Check if message content was in order
+	                		if(userToken.length()!=10&&gameToken.length()!=3){
+	                			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
+	                        	out.println(returnMessage);
+	                		}
+	                		//Check if user token is valid
+	                		else if(IOUtility.isValidUserToken(userToken)){
+	                        	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
+	                        	out.println(returnMessage);
+	                        }
+	                        
+	                        //Check if game token is valid
+	                        else if(IOUtility.isValidGameToken(gameToken)){
+	                        	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
+	                        	out.println(returnMessage);
+	                        } else {
+	                        	playersAnswer.add(choice);
+	                        }
+                		}
+                	}while(playersAnswer.size()<totalPlayers);
+                	
                 }
                 
                 
