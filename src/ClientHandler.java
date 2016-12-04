@@ -110,8 +110,8 @@ public class ClientHandler implements  Runnable{
                 //Game Round
                 ArrayList<String> words = IOUtility.getWords();
                 for(String word: words){
-                	String[] qa = word.split(" : ");
-                	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + qa[0] + "--" + qa[1];
+                	String[] questionAnswer = word.split(" : ");
+                	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + questionAnswer[0] + "--" + questionAnswer[1];
                 	int totalPlayers = FoilMakerServer.getNumUsers();
                 	ArrayList<String> suggestions = new ArrayList<String>();
                 	do{
@@ -162,6 +162,12 @@ public class ClientHandler implements  Runnable{
 	                        }
                 		}
                 	}while(suggestions.size()<totalPlayers);
+                	String answer = questionAnswer[1];
+                	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.ROUNDOPTIONS + "--" + answer;
+                	for(String suggestion : suggestions){
+                		returnMessage += "--" + suggestion;
+                	}
+                	out.println(returnMessage);
                 }
                 
                 
