@@ -112,10 +112,56 @@ public class ClientHandler implements  Runnable{
                 for(String word: words){
                 	String[] qa = word.split(" : ");
                 	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + qa[0] + "--" + qa[1];
-                	int totalPlayers = FoilMakerServer.getNumUsers(), allSuggests = 0;
+                	int totalPlayers = FoilMakerServer.getNumUsers();
+                	ArrayList<String> suggestions = new ArrayList<String>();
                 	do{
+                		if (in.ready()){
+                            message = in.readLine();
+                            System.out.println("Message \"" + message + "\" recieved!");
+                        }else{
+                            continue;
+                        }
+                		messageType = message.split("--")[0];
+                		returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.PLAYERSUGGESTION;
                 		
-                	}while(allSuggests<totalPlayers);
+                		//Check if messageType is PLAYERSUGGESTION
+                		if(!messageType.equals("PLAYERSUGGESTION")){
+                			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.UNEXPECTEDMESSAGETYPE;
+                			out.println(returnMessage);
+                		
+                		} else{
+                			tokens = new String[message.split("--").length-1];
+                            i = 0;
+                            for(String token : message.split("--")){
+                                if(!token.equals(messageType)){
+                                    tokens[i] = token;
+                                    i++;
+                                }
+
+                            }
+                            String userToken = tokens[0];
+                            String gameToken = tokens[1];
+                            String suggestion = tokens[2];
+                            //Check if message content was in order
+	                		if(userToken.length()!=10&&gameToken.length()!=3){
+	                			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
+	                        	out.println(returnMessage);
+	                		}
+	                		//Check if user token is valid
+	                		else if(IOUtility.isValidUserToken(userToken)){
+	                        	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
+	                        	out.println(returnMessage);
+	                        }
+	                        
+	                        //Check if game token is valid
+	                        else if(IOUtility.isValidGameToken(gameToken)){
+	                        	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
+	                        	out.println(returnMessage);
+	                        } else {
+	                        	suggestions.add(suggestion);
+	                        }
+                		}
+                	}while(suggestions.size()<totalPlayers);
                 }
                 
                 
