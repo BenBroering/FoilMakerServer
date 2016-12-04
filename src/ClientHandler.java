@@ -15,6 +15,9 @@ public class ClientHandler implements Runnable{
     private int timesFooledOthers;
     private int timesFooledByOther;
     private String cookie;
+    private String rightAnswer;
+    private String playerAnswer;
+    private String playerChoice;
 
     public ClientHandler(Socket socket){
         this.socket = socket;
@@ -103,13 +106,13 @@ public class ClientHandler implements Runnable{
                     
                     returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.ALLPARTICIPANTSHAVEJOINED;
                     //Check if user token is valid
-                    if(IOUtility.isValidUserToken(userToken)){
+                    if(!IOUtility.isValidUserToken(userToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
                     	out.println(returnMessage);
                     }
                     
                     //Check if game token is valid
-                    else if(IOUtility.isValidGameToken(gameToken)){
+                    else if(!IOUtility.isValidGameToken(gameToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
                     	out.println(returnMessage);
                     }

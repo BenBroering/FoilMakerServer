@@ -11,7 +11,8 @@ public class FoilMakerServer{
 
     private static ArrayList<String> loggedInUsers = new ArrayList<>();
     private static HashMap<String, ArrayList<ClientHandler>> activeGames = new HashMap<String, ArrayList<ClientHandler>>();
-
+    //Reference in HashMap is game key of each game.
+    
     public static void main(String[] args) throws IOException{
         /**
          * This waits for a connection and then creates a new ClientHandler if a connection is found.
