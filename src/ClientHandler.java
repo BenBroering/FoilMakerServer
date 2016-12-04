@@ -5,16 +5,23 @@ import java.util.ArrayList;
 /**
  * Created by Ben on 11/29/2016.
  */
-public class ClientHandler implements  Runnable{
+public class ClientHandler implements Runnable{
 
     private Socket socket;
     private String userInfo;
     private String username;
     private String password;
+    private int score;
+    private int timesFooledOthers;
+    private int timesFooledByOther;
     private String cookie;
 
     public ClientHandler(Socket socket){
         this.socket = socket;
+    }
+
+    public Socket getSocket() {
+        return socket;
     }
 
     @Override
@@ -67,8 +74,18 @@ public class ClientHandler implements  Runnable{
 
                 if(messageType.equals("LOGOUT")){
                     FoilMakerServer.userLogout(userInfo);
-                    
+
                     //out.println(returnMessage);
+                }
+
+                if(messageType.equals("STARTNEWGAME")){
+                    returnMessage = IOUtility.createNewGame(tokens[0], cookie, this);
+                    out.println(returnMessage);
+                }
+
+                if(messageType.equals("JOINGAME")){
+                    returnMessage = IOUtility.joinGame(tokens[0], tokens[1], this);
+                    out.println(returnMessage);
                 }
 
 
@@ -219,23 +236,62 @@ public class ClientHandler implements  Runnable{
                 	}while(playersAnswer.size()<totalPlayers);
                 	
                 }
-                
-                
-                
-                
-                
-                System.out.println("EYY!");
             }
 
         }catch (IOException e){
-            System.out.println("IO ERROR!");
+            System.out.println("IO ERROR in ClientHandler run() method.");
         }
+    }
+
+    public void sendMessage(String message){
+        PrintWriter out = null;
+        try{
+            out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(message);
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if(out != null)
+                out.close();
+        }
+
     }
 
     public void setUserInfo(String userInfo){
         this.userInfo = userInfo;
         this.username = userInfo.split(":")[0];
         this.password = userInfo.split(":")[1];
-        this.cookie = userInfo.split(":")[2];
+        this.score = Integer.parseInt(userInfo.split(":")[2]);
+        this.timesFooledOthers = Integer.parseInt(userInfo.split(":")[3]);
+        this.timesFooledByOther = Integer.parseInt(userInfo.split(":")[4]);
+        this.cookie = userInfo.split(":")[5];
+    }
+
+    public String getUserInfo() {
+        return userInfo;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getTimesFooledOthers() {
+        return timesFooledOthers;
+    }
+
+    public int getTimesFooledByOther() {
+        return timesFooledByOther;
+    }
+
+    public String getCookie() {
+        return cookie;
     }
 }

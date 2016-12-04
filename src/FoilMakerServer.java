@@ -2,31 +2,41 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Ben on 11/29/2016.
  */
-public class FoilMakerServer {
+public class FoilMakerServer{
 
     private static ArrayList<String> loggedInUsers = new ArrayList<>();
+    private static HashMap<String, ArrayList<ClientHandler>> activeGames = new HashMap<String, ArrayList<ClientHandler>>();
 
     public static void main(String[] args) throws IOException{
-
         /**
          * This waits for a connection and then creates a new ClientHandler if a connection is found.
          *
          * We may keep a list of the connections later.
          */
-        System.out.println("Looking for connections...");
         ServerSocket listener = new ServerSocket(9999);
-        while(true){
+        while(true) {
+            System.out.println("Waiting for a connection...");
             Socket socket = listener.accept();
             System.out.println(socket.getInetAddress().toString() + " connected!");
             ClientHandler newUser = new ClientHandler(socket);
-            newUser.run();
+            Thread thread = new Thread(newUser);
+            thread.start();
         }
     }
-    
+
+    public static HashMap<String, ArrayList<ClientHandler>> getActiveGames() {
+        return activeGames;
+    }
+
+    public static ArrayList<String> getLoggedInUsers(){
+        return loggedInUsers;
+    }
+
     public static int getNumUsers(){
     	return loggedInUsers.size();
     }
@@ -44,4 +54,5 @@ public class FoilMakerServer {
         }
 
     }
+
 }

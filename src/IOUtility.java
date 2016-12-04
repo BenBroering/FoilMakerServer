@@ -9,21 +9,21 @@ import java.util.Random;
  * A message it returned that will be sent to the client in the ClientHandler class.
  */
 public class IOUtility {
-	private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
+	/*private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
     private static File wordFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\WordleDeck");
     private static File userKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserTokenData");
-    private static File gameKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\GameTokenData");
-	//private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
-    //private static File wordFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
-    //private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
-    //private static File gameKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\GameTokenData");
+    private static File gameKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\GameTokenData");*/
+	private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
+    private static File wordFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
+    private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
+    private static File gameKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\GameTokenData");
+
     private static BufferedReader in = null;
     private static BufferedWriter out = null;
 
     public static ArrayList<String> getWords() throws IOException{
         try{
             in = new BufferedReader(new FileReader(wordFile));
-            out = new BufferedWriter(new FileWriter(wordFile));
 
             ArrayList<String> words = new ArrayList<>();
             String word;
@@ -54,6 +54,8 @@ public class IOUtility {
         }finally {
             if(in != null)
                 in.close();
+            if(out != null)
+                out.close();
         }
     }
 
@@ -114,7 +116,12 @@ public class IOUtility {
             return false;
     	} catch(IOException e){
     		throw e;	
-    	}
+    	}finally {
+            if(in != null)
+                in.close();
+            if(out != null)
+                out.close();
+        }
     }
     
     public static boolean isValidGameToken(String gameToken) throws IOException{
@@ -134,7 +141,12 @@ public class IOUtility {
             return false;
     	} catch(IOException e){
     		throw e;	
-    	}
+    	}finally {
+            if(in != null)
+                in.close();
+            if(out != null)
+                out.close();
+        }
     }
     
     public static String generateCookie(){
@@ -171,19 +183,21 @@ public class IOUtility {
                 return "RESPONSE--CREATENEWUSER--INVALIDUSERPASSWORD";
 
 
-            out = new BufferedWriter(new FileWriter(userFile));
-            out.append("\n" + username+ ":" + password);
+            out = new BufferedWriter(new FileWriter(userFile, true));
+            out.newLine();
+            String infoToAdd = (username+ ":" + password + ":" + 0 + ":" + 0 + ":" + 0);
+            out.append(infoToAdd);
             out.flush();
             return "RESPONSE--CREATENEWUSER--SUCCESS";
-
-
         } finally {
             if(out != null)
                 out.close();
+            if(in != null)
+                in.close();
         }
     }
     
-    public static String login(String username, String password, ClientHandler client) throws IOException{
+    public static String login(String username, String password, ClientHandler clientHandler) throws IOException{
         if(username == null || password == null){
             return "RESPONSE--CREATENEWUSER--INVALIDMESSAGEFORMAT";
         }
@@ -199,6 +213,11 @@ public class IOUtility {
                 }
             }
 
+            for(String loggedInUser : FoilMakerServer.getLoggedInUsers()){
+                if(loggedInUser.contains(loginAttempt))
+                    return "RESPONSE--LOGIN--USERALREADYLOGGEDIN";
+            }
+
             if(!userFound)
                 return "RESPONSE--LOGIN--UNKNOWNUSER";
 
@@ -206,9 +225,9 @@ public class IOUtility {
             if(password.equals(loginAttempt.split(":")[1])){
                 String cookie = generateCookie();
                 String userInfo = loginAttempt + ":" + cookie;
-                client.setUserInfo(userInfo);
-                out = new BufferedWriter(new FileWriter(userKeyFile));
-                out.append("\n" + username+ ":" + cookie);
+                clientHandler.setUserInfo(userInfo);
+                out = new BufferedWriter(new FileWriter(userKeyFile, true));
+                out.append("\n" + username + ":" + cookie);
                 out.flush();
                 FoilMakerServer.userLogin(userInfo);
                 return "RESPONSE--LOGIN--SUCCESS--" + cookie;
@@ -216,12 +235,47 @@ public class IOUtility {
                 return "RESPONSE--LOGIN--INVALIDUSERPASSWORD";
             }
 
-
-
-
         } finally {
             if(out != null)
                 out.close();
+            if(in != null)
+                in.close();
         }
     }
+
+    // Creates a new game.
+    public static String createNewGame(String userToken, String cookie, ClientHandler clientHandler) throws IOException {
+        if(userToken == null || userToken.equals(""))
+            return "RESPONSE--STARTNEWGAME--FAILURE";
+        if(cookie == null || cookie.equals(""))
+            return "RESPONSE--STARTNEWGAME--USERNOTLOGGEDIN";
+
+        if(userToken.equals(cookie)){
+            String gameToken = generateCookie().substring(0,3).toLowerCase();
+            FoilMakerServer.getActiveGames().put(gameToken, new ArrayList<>());
+            FoilMakerServer.getActiveGames().get(gameToken).add(clientHandler);
+            return "RESPONSE--STARTNEWGAME--SUCCESS--" + gameToken;
+        }else{
+            return "RESPONSE--STARTNEWGAME--USERNOTLOGGEDIN";
+        }
+    }
+
+    public static String joinGame(String userToken, String gameToken, ClientHandler clientHandler) throws IOException {
+        if(userToken == null || userToken.equals(""))
+            return "RESPONSE--STARTNEWGAME--USERNOTLOGGEDIN";
+        if(gameToken == null || gameToken.equals(""))
+            return "RESPONSE--STARTNEWGAME--GAMEKEYNORFOUND";
+
+        if(userToken.equals(clientHandler.getCookie()) && FoilMakerServer.getActiveGames().get(gameToken) != null){
+            FoilMakerServer.getActiveGames().get(gameToken).add(clientHandler);
+            ClientHandler host = FoilMakerServer.getActiveGames().get(gameToken).get(0);
+            host.sendMessage("NEWPARTICIPANT--" + clientHandler.getUsername() + "--" + host.getScore());
+            return "RESPONSE--STARTNEWGAME--SUCCESS--" + gameToken;
+        }else if(!userToken.equals(clientHandler.getCookie())){
+            return "RESPONSE--STARTNEWGAME--USERNOTLOGGEDIN";
+        }else{
+            return "RESPONSE--STARTNEWGAME--GAMEKEYNORFOUND";
+        }
+    }
+
 }
