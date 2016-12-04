@@ -252,7 +252,7 @@ public class IOUtility {
 
         if(userToken.equals(cookie)){
             String gameToken = generateCookie().substring(0,3).toLowerCase();
-            FoilMakerServer.getActiveGames().put(gameToken, new ArrayList<>());
+            FoilMakerServer.getActiveGames().put(gameToken, new ArrayList<ClientHandler>());
             FoilMakerServer.getActiveGames().get(gameToken).add(clientHandler);
             return "RESPONSE--STARTNEWGAME--SUCCESS--" + gameToken;
         }else{
@@ -276,6 +276,10 @@ public class IOUtility {
         }else{
             return "RESPONSE--STARTNEWGAME--GAMEKEYNORFOUND";
         }
+    }
+    
+    public static void round(){
+    	
     }
 
 }

@@ -26,6 +26,7 @@ public class FoilMakerServer{
             ClientHandler newUser = new ClientHandler(socket);
             Thread thread = new Thread(newUser);
             thread.start();
+            
         }
     }
 
