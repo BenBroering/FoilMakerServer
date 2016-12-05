@@ -98,8 +98,18 @@ public class IOUtility {
 
         return false;
     }
-    
-    public static boolean isValidUserToken(String userToken) throws IOException{
+
+    public static boolean isUserLoggedIn(String userToken) throws IOException {
+        for(String user : FoilMakerServer.getLoggedInUsers()){
+            System.out.println(user + " -- " + userToken);
+            if(user.contains(userToken)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*public static boolean isValidUserToken(String userToken) throws IOException{
     	if(userToken==null||userToken.length()!=10){
     		return false;
     	}
@@ -122,9 +132,9 @@ public class IOUtility {
             if(out != null)
                 out.close();
         }
-    }
+    }*/
     
-    public static boolean isValidGameToken(String gameToken) throws IOException{
+    /*public static boolean isValidGameToken(String gameToken) throws IOException{
     	if(gameToken==null||gameToken.length()!=3){
     		return false;
     	}
@@ -147,7 +157,7 @@ public class IOUtility {
             if(out != null)
                 out.close();
         }
-    }
+    }*/
     
     public static boolean isPlayerAlreadyGaming(ClientHandler user, String gameKey){
     	if(user==null||gameKey==null){
@@ -345,13 +355,13 @@ public class IOUtility {
 	            			System.out.println(returnMessage);
 	            		}
 	            		//Check if user token is valid
-	            		else if(IOUtility.isValidUserToken(userToken)){
+	            		else if(!IOUtility.isUserLoggedIn(userToken)){
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
 	                    	System.out.println(returnMessage);
 	                    }
 	                    
 	                    //Check if game token is valid
-	                    else if(IOUtility.isValidGameToken(gameToken)){
+	                    else if(!FoilMakerServer.getActiveGames().containsKey(gameToken)){
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
 	                    	System.out.println(returnMessage);
 	                    } else {
@@ -400,13 +410,13 @@ public class IOUtility {
 	            			System.out.println(returnMessage);
 	            		}
 	            		//Check if user token is valid
-	            		else if(IOUtility.isValidUserToken(userToken)){
+	            		else if(!IOUtility.isUserLoggedIn(userToken)){
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
 	                    	System.out.println(returnMessage);
 	                    }
 	                    
 	                    //Check if game token is valid
-	                    else if(IOUtility.isValidGameToken(gameToken)){
+	                    else if(!FoilMakerServer.getActiveGames().containsKey(gameToken)){
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
 	                    	System.out.println(returnMessage);
 	                    } else {

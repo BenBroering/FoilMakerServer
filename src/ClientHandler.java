@@ -106,13 +106,14 @@ public class ClientHandler implements Runnable{
                     
                     returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.ALLPARTICIPANTSHAVEJOINED;
                     //Check if user token is valid
-                    if(!IOUtility.isValidUserToken(userToken)){
+
+                    if(!IOUtility.isUserLoggedIn(userToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
                     	out.println(returnMessage);
                     }
                     
                     //Check if game token is valid
-                    else if(!IOUtility.isValidGameToken(gameToken)){
+                    else if(!FoilMakerServer.getActiveGames().containsKey(gameToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
                     	out.println(returnMessage);
                     }
