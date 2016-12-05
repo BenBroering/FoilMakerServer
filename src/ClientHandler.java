@@ -123,9 +123,11 @@ public class ClientHandler implements Runnable{
                     }
                     //tokens are good to go. Start game
                     else{
-                    	//Method to start game.
+                    	IOUtility.round(gameToken);
                     }
                 }
+                
+                
                 
                 
             }
@@ -186,4 +188,9 @@ public class ClientHandler implements Runnable{
     public String getCookie() {
         return cookie;
     }
+    
+    public void setRightAnswer(String rightAnswer){
+    	this.rightAnswer = rightAnswer;
+    }
+    
 }

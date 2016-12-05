@@ -289,120 +289,154 @@ public class IOUtility {
         }
     }
     
-    /*public static void round(String gameKey){
+    public static void round(String gameKey) throws IOException{
     	String returnMessage = "";
+    	String message = "";
+    	String messageType = "";
+    	String[] tokens;
     	//Game Round
-        ArrayList<String> words = IOUtility.getWords();
-        for(String word: words){
-        	String[] questionAnswer = word.split(" : ");
-        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + questionAnswer[0] + "--" + questionAnswer[1];
-        	int totalPlayers = FoilMakerServer.getNumUsers();
-        	ArrayList<String> suggestions = new ArrayList<String>();
-        	do{
-        		if (in.ready()){
-                    message = in.readLine();
-                    System.out.println("Message \"" + message + "\" recieved!");
-                }else{
-                    continue;
-                }
-        		messageType = message.split("--")[0];
-        		returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.PLAYERSUGGESTION;
-        		
-        		//Check if messageType is PLAYERSUGGESTION
-        		if(!messageType.equals("PLAYERSUGGESTION")){
-        			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.UNEXPECTEDMESSAGETYPE;
-        			out.println(returnMessage);
-        		
-        		} else{
-        			tokens = new String[message.split("--").length-1];
-                    i = 0;
-                    for(String token : message.split("--")){
-                        if(!token.equals(messageType)){
-                            tokens[i] = token;
-                            i++;
-                        }
+    	ArrayList<String> words = IOUtility.getWords();
+    	try{
+	    	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
+	    	
+	    	for(String word: words){
+	        	String[] questionAnswer = word.split(" : ");
+	        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + questionAnswer[0] + "--" + questionAnswer[1];
+	        	sendMessageToAllPlayers(returnMessage, game);
+	        	setRightAnswerToPlayers(questionAnswer[1], game);
+	        	
+	        	int totalPlayers = game.size();
+	        	ArrayList<String> suggestions = new ArrayList<String>();
+	        	do{
+	        		if (in.ready()){
+	                    message = in.readLine();
+	                    System.out.println("Message \"" + message + "\" recieved!");
+	                }else{
+	                    continue;
+	                }
+	        		messageType = message.split("--")[0];
+	        		returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.PLAYERSUGGESTION;
+	        		tokens = new String[message.split("--").length-1];
+	        		
+	        		//Check if messageType is PLAYERSUGGESTION
+	        		if(!messageType.equals("PLAYERSUGGESTION")){
+	        			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.UNEXPECTEDMESSAGETYPE;
+	        			System.out.println(returnMessage);
+	        		
+	        		} else{
+	        			tokens = new String[message.split("--").length-1];
+	                    int i = 0;
+	                    for(String token : message.split("--")){
+	                        if(!token.equals(messageType)){
+	                            tokens[i] = token;
+	                            i++;
+	                        }
+	
+	                    }
+	                    String userToken = tokens[0];
+	                    String gameToken = tokens[1];
+	                    String suggestion = tokens[2];
+	                    //Check if message content was in order
+	            		if(userToken.length()!=10&&gameToken.length()!=3){
+	            			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
+	            			System.out.println(returnMessage);
+	            		}
+	            		//Check if user token is valid
+	            		else if(IOUtility.isValidUserToken(userToken)){
+	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
+	                    	System.out.println(returnMessage);
+	                    }
+	                    
+	                    //Check if game token is valid
+	                    else if(IOUtility.isValidGameToken(gameToken)){
+	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
+	                    	System.out.println(returnMessage);
+	                    } else {
+	                    	suggestions.add(suggestion);
+	                    }
+	        		}
+	        	}while(suggestions.size()<totalPlayers);
+	        	String answer = questionAnswer[1];
+	        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.ROUNDOPTIONS + "--" + answer;
+	        	for(String suggestion : suggestions){
+	        		returnMessage += "--" + suggestion;
+	        	}
+	        	sendMessageToAllPlayers(returnMessage, game);
+	        	ArrayList<String> playersAnswer = new ArrayList<String>();
+	        	do{
+	        		if (in.ready()){
+	                    message = in.readLine();
+	                    System.out.println("Message \"" + message + "\" recieved!");
+	                }else{
+	                    continue;
+	                }
+	        		messageType = message.split("--")[0];
+	        		returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.PLAYERCHOICE;
+	        		
+	        		//Check if messageType is PLAYERSUGGESTION
+	        		if(!messageType.equals("PLAYERCHOICE")){
+	        			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.UNEXPECTEDMESSAGETYPE;
+	        			System.out.println(returnMessage);
+	        		
+	        		} else{
+	        			tokens = new String[message.split("--").length-1];
+	                    int i = 0;
+	                    for(String token : message.split("--")){
+	                        if(!token.equals(messageType)){
+	                            tokens[i] = token;
+	                            i++;
+	                        }
+	
+	                    }
+	                    String userToken = tokens[0];
+	                    String gameToken = tokens[1];
+	                    String choice = tokens[2];
+	                    //Check if message content was in order
+	            		if(userToken.length()!=10&&gameToken.length()!=3){
+	            			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
+	            			System.out.println(returnMessage);
+	            		}
+	            		//Check if user token is valid
+	            		else if(IOUtility.isValidUserToken(userToken)){
+	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
+	                    	System.out.println(returnMessage);
+	                    }
+	                    
+	                    //Check if game token is valid
+	                    else if(IOUtility.isValidGameToken(gameToken)){
+	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
+	                    	System.out.println(returnMessage);
+	                    } else {
+	                    	playersAnswer.add(choice);
+	                    }
+	        		}
+	        	}while(playersAnswer.size()<totalPlayers);
+	        	
+	    	}
+    	} catch (IOException e){
+    		throw e;
+    	} catch(Exception e){
+    		e.printStackTrace();
+    	}
+    }
 
-                    }
-                    String userToken = tokens[0];
-                    String gameToken = tokens[1];
-                    String suggestion = tokens[2];
-                    //Check if message content was in order
-            		if(userToken.length()!=10&&gameToken.length()!=3){
-            			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
-                    	out.println(returnMessage);
-            		}
-            		//Check if user token is valid
-            		else if(IOUtility.isValidUserToken(userToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
-                    	out.println(returnMessage);
-                    }
-                    
-                    //Check if game token is valid
-                    else if(IOUtility.isValidGameToken(gameToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
-                    	out.println(returnMessage);
-                    } else {
-                    	suggestions.add(suggestion);
-                    }
-        		}
-        	}while(suggestions.size()<totalPlayers);
-        	String answer = questionAnswer[1];
-        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.ROUNDOPTIONS + "--" + answer;
-        	for(String suggestion : suggestions){
-        		returnMessage += "--" + suggestion;
-        	}
-        	out.println(returnMessage);
-        	ArrayList<String> playersAnswer = new ArrayList<String>();
-        	do{
-        		if (in.ready()){
-                    message = in.readLine();
-                    System.out.println("Message \"" + message + "\" recieved!");
-                }else{
-                    continue;
-                }
-        		messageType = message.split("--")[0];
-        		returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.PLAYERCHOICE;
-        		
-        		//Check if messageType is PLAYERSUGGESTION
-        		if(!messageType.equals("PLAYERCHOICE")){
-        			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.UNEXPECTEDMESSAGETYPE;
-        			out.println(returnMessage);
-        		
-        		} else{
-        			tokens = new String[message.split("--").length-1];
-                    i = 0;
-                    for(String token : message.split("--")){
-                        if(!token.equals(messageType)){
-                            tokens[i] = token;
-                            i++;
-                        }
-
-                    }
-                    String userToken = tokens[0];
-                    String gameToken = tokens[1];
-                    String choice = tokens[2];
-                    //Check if message content was in order
-            		if(userToken.length()!=10&&gameToken.length()!=3){
-            			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
-                    	out.println(returnMessage);
-            		}
-            		//Check if user token is valid
-            		else if(IOUtility.isValidUserToken(userToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
-                    	out.println(returnMessage);
-                    }
-                    
-                    //Check if game token is valid
-                    else if(IOUtility.isValidGameToken(gameToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
-                    	out.println(returnMessage);
-                    } else {
-                    	playersAnswer.add(choice);
-                    }
-        		}
-        	}while(playersAnswer.size()<totalPlayers);
-        	
-        }
-    }*/
-
+    private static void sendMessageToAllPlayers(String message, ArrayList<ClientHandler> players){
+    	if(players==null||message==null||players.size()==0){
+    		return;
+    	}
+    	for(ClientHandler player: players){
+    		player.sendMessage(message);
+    	}
+    }
+    
+    private static void setRightAnswerToPlayers(String answer, ArrayList<ClientHandler> players){
+    	if(players==null||answer==null||players.size()==0){
+    		return;
+    	}
+    	for(ClientHandler player: players){
+    		player.setRightAnswer(answer);
+    	}
+    }
+    
+    
 }
