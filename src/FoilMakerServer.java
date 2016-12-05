@@ -11,6 +11,7 @@ public class FoilMakerServer{
 
     private static ArrayList<String> loggedInUsers = new ArrayList<>();
     private static HashMap<String, ArrayList<ClientHandler>> activeGames = new HashMap<String, ArrayList<ClientHandler>>();
+    private static HashMap<String, ArrayList<String>> answersCollection = new HashMap<String, ArrayList<String>>();
     //Reference in HashMap is game key of each game.
     
     public static void main(String[] args) throws IOException{
@@ -55,6 +56,21 @@ public class FoilMakerServer{
 
         }
 
+    }
+    
+    public static ArrayList<String> getAnswerCollection(String gameKey){
+    	if(answersCollection.containsKey(gameKey)){
+    		return answersCollection.get(gameKey);
+    	}
+    	else{
+    		return null;
+    	}
+    }
+    
+    public static void addAnswerToCollection(String gamekey, String answer){
+    	if(answersCollection.containsKey(gamekey)){
+    		answersCollection.get(gamekey).add(answer);
+    	}
     }
 
 }

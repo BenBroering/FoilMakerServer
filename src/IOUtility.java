@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -20,6 +21,7 @@ public class IOUtility {
 
     private static BufferedReader in = null;
     private static BufferedWriter out = null;
+    
 
     public static ArrayList<String> getWords() throws IOException{
         try{
@@ -397,13 +399,13 @@ public class IOUtility {
 	            			System.out.println(returnMessage);
 	            		}
 	            		//Check if user token is valid
-	            		else if(IOUtility.isValidUserToken(userToken)){
+	            		else if(!IOUtility.isValidUserToken(userToken)){
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
 	                    	System.out.println(returnMessage);
 	                    }
 	                    
 	                    //Check if game token is valid
-	                    else if(IOUtility.isValidGameToken(gameToken)){
+	                    else if(!IOUtility.isValidGameToken(gameToken)){
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
 	                    	System.out.println(returnMessage);
 	                    } else {
@@ -437,6 +439,8 @@ public class IOUtility {
     		player.setRightAnswer(answer);
     	}
     }
+    
+    
     
     
 }
