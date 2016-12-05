@@ -101,7 +101,6 @@ public class IOUtility {
 
     public static boolean isUserLoggedIn(String userToken) throws IOException {
         for(String user : FoilMakerServer.getLoggedInUsers()){
-            System.out.println(user + " -- " + userToken);
             if(user.contains(userToken)){
                 return true;
             }
@@ -163,11 +162,19 @@ public class IOUtility {
     	if(user==null||gameKey==null){
     		return false;
     	}
-    	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
-    	if(game==null){
+
+    	if(FoilMakerServer.getActiveGames().get(gameKey)==null){
     		return false;
     	}
-    	return (game.contains(user));
+
+    	int numberOfGamesPlaying = 0;
+    	for(ArrayList<ClientHandler> game : FoilMakerServer.getActiveGames().values()){
+            if(game.contains(user))
+                numberOfGamesPlaying++;
+            if(numberOfGamesPlaying > 1)
+                return true;
+        }
+        return false;
     }
     
     public static String generateCookie(){
@@ -293,7 +300,6 @@ public class IOUtility {
 
             PrintWriter out = new PrintWriter(host.getSocket().getOutputStream(), true);
             out.println("NEWPARTICIPANT--" + clientHandler.getUsername() + "--" + host.getScore());
-            System.out.println("NEWPARTICIPANT--" + clientHandler.getUsername() + "--" + host.getScore());
             return "RESPONSE--JOINGAME--SUCCESS--" + gameToken;
         }else if(!userToken.equals(clientHandler.getCookie())){
             return "RESPONSE--JOINGAME--USERNOTLOGGEDIN";
@@ -313,8 +319,9 @@ public class IOUtility {
 	    	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
 	    	
 	    	for(String word: words){
-	        	String[] questionAnswer = word.split(" : ");
+	        	String[] questionAnswer = word.split(":");
 	        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + questionAnswer[0] + "--" + questionAnswer[1];
+                System.out.println(returnMessage);
 	        	sendMessageToAllPlayers(returnMessage, game);
 	        	setRightAnswerToPlayers(questionAnswer[1], game);
 	        	
@@ -344,7 +351,6 @@ public class IOUtility {
 	                            tokens[i] = token;
 	                            i++;
 	                        }
-	
 	                    }
 	                    String userToken = tokens[0];
 	                    String gameToken = tokens[1];
@@ -437,8 +443,16 @@ public class IOUtility {
     	if(players==null||message==null||players.size()==0){
     		return;
     	}
+
     	for(ClientHandler player: players){
-    		player.sendMessage(message);
+            try {
+                PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
+                sendOut.println("");
+                sendOut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
     	}
     }
     

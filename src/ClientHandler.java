@@ -138,22 +138,6 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void sendMessage(String message){
-        PrintWriter out = null;
-        try{
-            out = new PrintWriter(socket.getOutputStream(), true);
-            System.out.println(message);
-            out.println(message);
-        }catch (IOException e){
-            e.printStackTrace();
-        }finally {
-            if(out != null)
-                out.close();
-        }
-
-    }
-
-
     public void setUserInfo(String userInfo){
         this.userInfo = userInfo;
         this.username = userInfo.split(":")[0];
