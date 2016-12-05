@@ -53,11 +53,8 @@ public class FoilMakerServer{
                 loggedInUsers.remove(userInfo);
                 return;
             }
-
         }
-
     }
-    
     public static ArrayList<String> getAnswerCollection(String gameKey){
     	if(answersCollection.containsKey(gameKey)){
     		return answersCollection.get(gameKey);

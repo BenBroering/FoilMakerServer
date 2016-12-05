@@ -127,38 +127,7 @@ public class ClientHandler implements Runnable{
                     }
                 }
                 
-                if(messageType.equals("PLAYERSUGGESTION")){
-                	tokens = new String[message.split("--").length-1];
-                    int i = 0;
-                    for(String token : message.split("--")){
-                        if(!token.equals(messageType)){
-                            tokens[i] = token;
-                            i++;
-                        }
-
-                    }
-                    String userToken = tokens[0];
-                    String gameToken = tokens[1];
-                    String suggestion = tokens[2];
-                    //Check if message content was in order
-            		if(userToken.length()!=10&&gameToken.length()!=3){
-            			returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDMESSAGEFORMAT;
-            			out.println(returnMessage);
-            		}
-            		//Check if user token is valid
-            		else if(IOUtility.isValidUserToken(userToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
-                    	out.println(returnMessage);
-                    }
-                    
-                    //Check if game token is valid
-                    else if(IOUtility.isValidGameToken(gameToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
-                    	out.println(returnMessage);
-                    } else {
-                    	suggestions.add(suggestion);
-                    }
-                }
+                
                 
                 
                 
@@ -174,6 +143,7 @@ public class ClientHandler implements Runnable{
         PrintWriter out = null;
         try{
             out = new PrintWriter(socket.getOutputStream(), true);
+            System.out.println(message);
             out.println(message);
         }catch (IOException e){
             e.printStackTrace();
@@ -183,6 +153,7 @@ public class ClientHandler implements Runnable{
         }
 
     }
+
 
     public void setUserInfo(String userInfo){
         this.userInfo = userInfo;

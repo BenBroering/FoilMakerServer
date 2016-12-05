@@ -10,14 +10,14 @@ import java.util.Random;
  * A message it returned that will be sent to the client in the ClientHandler class.
  */
 public class IOUtility {
-	private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
+	/*private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
     private static File wordFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\WordleDeck");
     private static File userKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserTokenData");
-    private static File gameKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\GameTokenData");
-	/*private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
+    private static File gameKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\GameTokenData");*/
+	private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
     private static File wordFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
     private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
-    private static File gameKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\GameTokenData");*/
+    private static File gameKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\GameTokenData");
 
     private static BufferedReader in = null;
     private static BufferedWriter out = null;
@@ -275,19 +275,22 @@ public class IOUtility {
 
     public static String joinGame(String userToken, String gameToken, ClientHandler clientHandler) throws IOException {
         if(userToken == null || userToken.equals(""))
-            return "RESPONSE--STARTNEWGAME--USERNOTLOGGEDIN";
+            return "RESPONSE--JOINGAME--USERNOTLOGGEDIN";
         if(gameToken == null || gameToken.equals(""))
-            return "RESPONSE--STARTNEWGAME--GAMEKEYNORFOUND";
+            return "RESPONSE--JOINGAME--GAMEKEYNORFOUND";
 
         if(userToken.equals(clientHandler.getCookie()) && FoilMakerServer.getActiveGames().get(gameToken) != null){
             FoilMakerServer.getActiveGames().get(gameToken).add(clientHandler);
             ClientHandler host = FoilMakerServer.getActiveGames().get(gameToken).get(0);
-            host.sendMessage("NEWPARTICIPANT--" + clientHandler.getUsername() + "--" + host.getScore());
-            return "RESPONSE--STARTNEWGAME--SUCCESS--" + gameToken;
+
+            PrintWriter out = new PrintWriter(host.getSocket().getOutputStream(), true);
+            out.println("NEWPARTICIPANT--" + clientHandler.getUsername() + "--" + host.getScore());
+            System.out.println("NEWPARTICIPANT--" + clientHandler.getUsername() + "--" + host.getScore());
+            return "RESPONSE--JOINGAME--SUCCESS--" + gameToken;
         }else if(!userToken.equals(clientHandler.getCookie())){
-            return "RESPONSE--STARTNEWGAME--USERNOTLOGGEDIN";
+            return "RESPONSE--JOINGAME--USERNOTLOGGEDIN";
         }else{
-            return "RESPONSE--STARTNEWGAME--GAMEKEYNORFOUND";
+            return "RESPONSE--JOINGAME--GAMEKEYNORFOUND";
         }
     }
     
