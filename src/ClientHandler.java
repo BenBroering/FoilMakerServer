@@ -117,7 +117,7 @@ public class ClientHandler implements Runnable{
                     	out.println(returnMessage);
                     }
                     //Check if user already playing the game.
-                    else if(false){
+                    else if(!IOUtility.isPlayerAlreadyGaming(this, gameToken)){
                     	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTGAMELEADER;
                     	out.println(returnMessage);
                     }

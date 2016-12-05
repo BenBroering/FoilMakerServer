@@ -149,6 +149,17 @@ public class IOUtility {
         }
     }
     
+    public static boolean isPlayerAlreadyGaming(ClientHandler user, String gameKey){
+    	if(user==null||gameKey==null){
+    		return false;
+    	}
+    	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
+    	if(game==null){
+    		return false;
+    	}
+    	return (game.contains(user));
+    }
+    
     public static String generateCookie(){
         String cookie = "";
         Random r = new Random();
