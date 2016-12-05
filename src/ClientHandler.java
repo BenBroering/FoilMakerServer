@@ -197,4 +197,13 @@ public class ClientHandler implements Runnable{
     	this.rightAnswer = rightAnswer;
     }
     
+    public String getRoundResults(){
+    	if(this.rightAnswer.equals(this.playerChoice)){
+    		return "hasWon";
+    	}
+    	else{
+    		return this.playerChoice;
+    	}
+    }
+    
 }

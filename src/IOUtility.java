@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by Ben on 11/29/2016.
@@ -311,7 +312,8 @@ public class IOUtility {
 	        	setRightAnswerToPlayers(questionAnswer[1], game);
 	        	
 	        	int totalPlayers = game.size();
-	        	ArrayList<String> suggestions = new ArrayList<String>();
+	        	HashMap<String, String> suggestions = new HashMap<String, String>();
+	        	//Key is the playerKey, value is the suggestion.
 	        	do{
 	        		if (in.ready()){
 	                    message = in.readLine();
@@ -357,17 +359,18 @@ public class IOUtility {
 	                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
 	                    	System.out.println(returnMessage);
 	                    } else {
-	                    	suggestions.add(suggestion);
+	                    	suggestions.put(userToken, suggestion);
 	                    }
 	        		}
 	        	}while(suggestions.size()<totalPlayers);
 	        	String answer = questionAnswer[1];
 	        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.ROUNDOPTIONS + "--" + answer;
-	        	for(String suggestion : suggestions){
+	        	Set<String> allChoices = suggestions.keySet();
+	        	for(String suggestion : allChoices){
 	        		returnMessage += "--" + suggestion;
 	        	}
 	        	sendMessageToAllPlayers(returnMessage, game);
-	        	ArrayList<String> playersAnswer = new ArrayList<String>();
+	        	HashMap<String, String> playersAnswer = new HashMap<String, String>();
 	        	do{
 	        		if (in.ready()){
 	                    message = in.readLine();
