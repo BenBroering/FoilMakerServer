@@ -314,10 +314,26 @@ public class IOUtility {
     	String messageType = "";
     	String[] tokens;
     	//Game Round
-    	ArrayList<String> words = IOUtility.getWords();
-    	try{
-	    	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
-	    	
+    	ArrayList<String> words = new ArrayList<>();
+        words.addAll(IOUtility.getWords());
+    	try {
+            ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
+
+            while (!words.isEmpty()) {
+                Random r = new Random();
+                String word = words.get(0);
+                words.remove(word);
+                String[] questionAnswer = word.split(":");
+                returnMessage = "NEWGAMEWORD--" + questionAnswer[0] + "--" + questionAnswer[1];
+                System.out.println(returnMessage);
+                sendMessageToAllPlayers(returnMessage, game);
+                setRightAnswerToPlayers(questionAnswer[1], game);
+
+
+
+            }
+
+            /*
 	    	for(String word: words){
 	        	String[] questionAnswer = word.split(":");
 	        	returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.NEWGAMEWORD + "--" + questionAnswer[0] + "--" + questionAnswer[1];
@@ -431,9 +447,7 @@ public class IOUtility {
 	        		}
 	        	}while(playersAnswer.size()<totalPlayers);
 	        	
-	    	}
-    	} catch (IOException e){
-    		throw e;
+	    	}*/
     	} catch(Exception e){
     		e.printStackTrace();
     	}
@@ -447,7 +461,7 @@ public class IOUtility {
     	for(ClientHandler player: players){
             try {
                 PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
-                sendOut.println("");
+                sendOut.println(message);
                 sendOut.close();
             } catch (IOException e) {
                 e.printStackTrace();
