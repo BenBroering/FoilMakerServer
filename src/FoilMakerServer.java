@@ -52,9 +52,6 @@ public class FoilMakerServer{
                 loggedInUsers.remove(userInfo);
                 return;
             }
-
         }
-
     }
-
 }

@@ -141,6 +141,7 @@ public class ClientHandler implements Runnable{
         PrintWriter out = null;
         try{
             out = new PrintWriter(socket.getOutputStream(), true);
+            System.out.println(message);
             out.println(message);
         }catch (IOException e){
             e.printStackTrace();
@@ -150,6 +151,7 @@ public class ClientHandler implements Runnable{
         }
 
     }
+
 
     public void setUserInfo(String userInfo){
         this.userInfo = userInfo;
