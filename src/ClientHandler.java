@@ -18,6 +18,9 @@ public class ClientHandler implements Runnable{
     private String rightAnswer;
     private String playerAnswer;
     private String playerChoice;
+    private ArrayList<String> wordsLeft;
+    private int answersGiven;
+    private int expectedNumAnswers;
 
     public ClientHandler(Socket socket){
         this.socket = socket;
@@ -124,11 +127,16 @@ public class ClientHandler implements Runnable{
                     }
                     //tokens are good to go. Start game
                     else{
-                    	IOUtility.round(gameToken);
+                    	IOUtility.sendWord(gameToken);
                     }
                 }
                 
-                
+                if(messageType.equals("PLAYERSUGGESTION")){
+                    if(tokens.length != 3){
+                        out.println("RESPONSE-­PLAYERSUGGESTION--INVALIDMESSAGEFORMAT");
+                    }
+                    IOUtility.addSuggestion(tokens[0], tokens[1], tokens[2], this);
+                }
                 
                 
             }
@@ -179,5 +187,20 @@ public class ClientHandler implements Runnable{
     public void setRightAnswer(String rightAnswer){
     	this.rightAnswer = rightAnswer;
     }
-    
+
+    public void setWordsLeft(ArrayList<String> wordsLeft) {
+        this.wordsLeft = wordsLeft;
+    }
+
+    public void setAnswersGiven(int answersGiven) {
+        this.answersGiven = answersGiven;
+    }
+
+    public void setExpectedNumAnswers(int expectedNumAnswers) {
+        this.expectedNumAnswers = expectedNumAnswers;
+    }
+
+    public ArrayList<String> getWordsLeft() {
+        return wordsLeft;
+    }
 }
