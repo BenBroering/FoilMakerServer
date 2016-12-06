@@ -303,13 +303,15 @@ public class IOUtility {
     		playerMsg = player.getUsername() + "--";
     		String playerMsgX = "";
     		String playerMsgY = "";
-    		if(player.getPlayerChoice().equals(player.getRightAnswer())){
+    		System.out.println("Player choice was " + player.getPlayerChoice());
+    		System.out.println("Right answer was " + player.getRightAnswer());
+    		if(player.getPlayerChoice().trim().equals(player.getRightAnswer().trim())){
     			player.increaseScore(10);
     			playerMsgX += "You got it right!";
     		} else {
     			for(ClientHandler playerX: game){
     				if(playerX!=player&&playerX.getPlayerAnswer().equals(player.getPlayerChoice())){
-    					playerMsgY += "You were fooled by " + player.getUsername();
+    					playerMsgY += "You were fooled by " + playerX.getUsername();
     					player.incrementTimesFooledByOther();
     					break;
     				}
@@ -320,7 +322,7 @@ public class IOUtility {
 				if(playerX!=player&&player.getPlayerAnswer().equals(playerX.getPlayerChoice())){
 					player.increaseScore(5);
 					player.incrementTimesFooledOthers();
-					playerMsgX += "You fooled " + player.getUsername() + ".";
+					playerMsgX += "You fooled " + playerX.getUsername() + ".";
 				}
 			}
     		if(playerMsgX.length()>0){
