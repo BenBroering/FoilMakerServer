@@ -313,13 +313,13 @@ public class IOUtility {
     		String playerMsgY = "";
     		System.out.println("Player choice was " + player.getPlayerChoice());
     		System.out.println("Right answer was " + player.getRightAnswer());
-    		if(player.getPlayerChoice().trim().equals(player.getRightAnswer().trim())){
+    		if(player.getPlayerChoice().equals(player.getRightAnswer().split(":")[1])){
     			player.increaseScore(10);
     			playerMsgX += "You got it right!";
     		} else {
     			for(ClientHandler playerX: game){
     				if(playerX!=player&&playerX.getPlayerAnswer().equals(player.getPlayerChoice())){
-    					playerMsgY += "You were fooled by " + playerX.getUsername();
+    					playerMsgY += "You were fooled by " + playerX.getUsername() + ".";
     					player.incrementTimesFooledByOther();
     					break;
     				}
@@ -334,12 +334,12 @@ public class IOUtility {
 				}
 			}
     		if(playerMsgX.length()>0){
-    			playerMsg += playerMsgX + "--";
+    			playerMsg += playerMsgX;
     		}
     		if(playerMsgY.length()>0){
-    			playerMsg += playerMsgY + "--";
+    			playerMsg += playerMsgY;
     		}
-    		playerMsg += player.getScore() + "--" + player.getTimesFooledOthers() + "--" + player.getTimesFooledByOther() + "--";
+    		playerMsg += "--" + player.getScore() + "--" + player.getTimesFooledOthers() + "--" + player.getTimesFooledByOther() + "--";
     		bigMsg += playerMsg;
     		
     	}
@@ -349,9 +349,9 @@ public class IOUtility {
         for (ClientHandler player : game) {
             PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
             sendOut.println(bigMsg);
-            IOUtility.sendWord(gameKey);
+            //IOUtility.sendWord(gameKey);
         }
-    	
+
     }
 
     public static String addSuggestion(String username, String gameToken, String suggestion, ClientHandler clientHandler) throws IOException {
