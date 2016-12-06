@@ -108,55 +108,6 @@ public class IOUtility {
         return false;
     }
 
-    /*public static boolean isValidUserToken(String userToken) throws IOException{
-    	if(userToken==null||userToken.length()!=10){
-    		return false;
-    	}
-    	try{
-    		in = new BufferedReader(new FileReader(userKeyFile));
-
-            String user;
-            while ((user = in.readLine()) != null){
-                String key = user.split(":")[1];
-                if(userToken.equals(key)){
-                	return true;
-                }
-            }
-            return false;
-    	} catch(IOException e){
-    		throw e;	
-    	}finally {
-            if(in != null)
-                in.close();
-            if(out != null)
-                out.close();
-        }
-    }*/
-    
-    /*public static boolean isValidGameToken(String gameToken) throws IOException{
-    	if(gameToken==null||gameToken.length()!=3){
-    		return false;
-    	}
-    	try{
-    		in = new BufferedReader(new FileReader(gameKeyFile));
-
-            String user;
-            while ((user = in.readLine()) != null){
-                String key = user.split(":")[0];
-                if(gameToken.equals(key)){
-                	return true;
-                }
-            }
-            return false;
-    	} catch(IOException e){
-    		throw e;	
-    	}finally {
-            if(in != null)
-                in.close();
-            if(out != null)
-                out.close();
-        }
-    }*/
     
     public static boolean isPlayerAlreadyGaming(ClientHandler user, String gameKey){
     	if(user==null||gameKey==null){
@@ -293,7 +244,7 @@ public class IOUtility {
         if(userToken == null || userToken.equals(""))
             return "RESPONSE--JOINGAME--USERNOTLOGGEDIN";
         if(gameToken == null || gameToken.equals(""))
-            return "RESPONSE--JOINGAME--GAMEKEYNORFOUND";
+            return "RESPONSE--JOINGAME--GAMEKEYNOTFOUND";
 
         if(userToken.equals(clientHandler.getCookie()) && FoilMakerServer.getActiveGames().get(gameToken) != null){
             FoilMakerServer.getActiveGames().get(gameToken).add(clientHandler);
@@ -305,7 +256,7 @@ public class IOUtility {
         }else if(!userToken.equals(clientHandler.getCookie())){
             return "RESPONSE--JOINGAME--USERNOTLOGGEDIN";
         }else{
-            return "RESPONSE--JOINGAME--GAMEKEYNORFOUND";
+            return "RESPONSE--JOINGAME--GAMEKEYNOTFOUND";
         }
     }
     
@@ -320,15 +271,22 @@ public class IOUtility {
             ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
             ArrayList<String> words = new ArrayList<>();
             words.addAll(game.get(0).getWordsLeft());
+            //TODO
+            // Random
             Random r = new Random();
             String word = words.get(0);
             words.remove(word);
             String[] questionAnswer = word.split(":");
             returnMessage = "NEWGAMEWORD--" + questionAnswer[0] + "--" + questionAnswer[1];
             System.out.println(returnMessage);
-            sendMessageToAllPlayers(returnMessage, game);
+            for(ClientHandler player: game){
+                PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
+                sendOut.println(returnMessage);
+            }
+
             setRightAnswerToPlayers(questionAnswer[1], game);
             for(ClientHandler player : game){
+                player.setRightAnswer(word);
                 player.setAnswersGiven(0);
                 player.setExpectedNumAnswers(game.size());
                 player.setWordsLeft(words);
@@ -399,6 +357,7 @@ public class IOUtility {
 
     	}
     }
+
     
     private static void setRightAnswerToPlayers(String answer, ArrayList<ClientHandler> players){
     	if(players==null||answer==null||players.size()==0){
@@ -409,12 +368,38 @@ public class IOUtility {
     	}
     }
 
-    public static void addSuggestion(String username, String gameToken, String suggestion, ClientHandler clientHandler) {
-        if(FoilMakerServer.getActiveGames().get(gameToken).contains(clientHandler)){
-            
+    public static String addSuggestion(String username, String gameToken, String suggestion, ClientHandler clientHandler) throws IOException {
+        if(username == null || gameToken == null || suggestion == null){
+            return "RESPONSE--PLAYERSUGGESTION--INVALIDMESSAGEFORMAT";
+        }
+        if(!FoilMakerServer.getActiveGames().containsKey(gameToken)){
+            return "RESPONSE--PLAYERSUGGESTION--INVALIDGAMETOKEN";
+        }
+        if(!FoilMakerServer.getActiveGames().get(gameToken).contains(clientHandler)){
+            return "RESPONSE--PLAYERSUGGESTION--USERNOTLOGGEDIN";
         }
 
+        //return "RESPONSE--PLAYERSUGGESTION--UNEXPECTEDMESSAGETYPE";
 
+        if(suggestion.trim().equals(""))
+            return "RESPONSE--PLAYERSUGGESTION--INVALIDMESSAGEFORMAT";
 
+        ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameToken);
+        clientHandler.setPlayerAnswer(suggestion);
+        for(ClientHandler player : game){
+            player.setAnswersGiven(player.getAnswersGiven()+1);
+        }
+        if(clientHandler.getAnswersGiven() >= clientHandler.getExpectedNumAnswers()){
+            String playerAnswers = "";
+            for(ClientHandler player : game){
+                playerAnswers += "" + player.getPlayerAnswer() + "--";
+            }
+            for(ClientHandler playerToSendMessage : game){
+                PrintWriter out = new PrintWriter(playerToSendMessage.getSocket().getOutputStream(), true);
+                String roundOptions = ("ROUNDOPTIONS--" + playerAnswers);
+                out.println(roundOptions.substring(0,roundOptions.length()-2));
+            }
+        }
+        return null;
     }
 }

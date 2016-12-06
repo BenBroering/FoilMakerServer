@@ -107,22 +107,22 @@ public class ClientHandler implements Runnable{
                 	String userToken = tokens[0];
                     String gameToken = tokens[1];
                     
-                    returnMessage = FoilMakerNetworkProtocol.MSG_TYPE.RESPONSE + "--" + FoilMakerNetworkProtocol.MSG_TYPE.ALLPARTICIPANTSHAVEJOINED;
+                    returnMessage = "RESPONSE--ALLPARTICIPANTSHAVEJOINED";
                     //Check if user token is valid
 
                     if(!IOUtility.isUserLoggedIn(userToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTLOGGEDIN;
+                    	returnMessage += "--USERNOTLOGGEDIN";
                     	out.println(returnMessage);
                     }
                     
                     //Check if game token is valid
                     else if(!FoilMakerServer.getActiveGames().containsKey(gameToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.INVALIDGAMETOKEN;
+                    	returnMessage += "--INVALIDGAMETOKEN";
                     	out.println(returnMessage);
                     }
                     //Check if user already playing the game.
                     else if(IOUtility.isPlayerAlreadyGaming(this, gameToken)){
-                    	returnMessage += "--" + FoilMakerNetworkProtocol.MSG_DETAIL_T.USERNOTGAMELEADER;
+                    	returnMessage += "--USERNOTGAMELEADER";
                     	out.println(returnMessage);
                     }
                     //tokens are good to go. Start game
@@ -135,10 +135,10 @@ public class ClientHandler implements Runnable{
                     if(tokens.length != 3){
                         out.println("RESPONSE-­PLAYERSUGGESTION--INVALIDMESSAGEFORMAT");
                     }
-                    IOUtility.addSuggestion(tokens[0], tokens[1], tokens[2], this);
+                    returnMessage = IOUtility.addSuggestion(tokens[0], tokens[1], tokens[2], this);
+                    if(returnMessage != null)
+                        out.println(returnMessage);
                 }
-                
-                
             }
 
         }catch (IOException e){
@@ -183,9 +183,37 @@ public class ClientHandler implements Runnable{
     public String getCookie() {
         return cookie;
     }
-    
+
+    public int getAnswersGiven() {
+        return answersGiven;
+    }
+
+    public int getExpectedNumAnswers() {
+        return expectedNumAnswers;
+    }
+
+    public String getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public String getPlayerAnswer() {
+        return playerAnswer;
+    }
+
+    public String getPlayerChoice() {
+        return playerChoice;
+    }
+
     public void setRightAnswer(String rightAnswer){
     	this.rightAnswer = rightAnswer;
+    }
+
+    public void setPlayerAnswer(String playerAnswer) {
+        this.playerAnswer = playerAnswer;
+    }
+
+    public void setPlayerChoice(String playerChoice) {
+        this.playerChoice = playerChoice;
     }
 
     public void setWordsLeft(ArrayList<String> wordsLeft) {
@@ -202,18 +230,6 @@ public class ClientHandler implements Runnable{
 
     public ArrayList<String> getWordsLeft() {
         return wordsLeft;
-    }
-    
-    public String getPlayerChoice(){
-    	return this.playerChoice;
-    }
-    
-    public String getPlayerAnswer(){
-    	return this.playerAnswer;
-    }
-    
-    public String getRightAnswer(){
-    	return this.rightAnswer;
     }
     
     public void increaseScore(int amount){
