@@ -355,6 +355,29 @@ public class IOUtility {
         }
 
     }
+    
+    public static void updateScore(ClientHandler player) throws IOException{
+    	try{
+    		in = new BufferedReader(new FileReader(userFile));
+    		out = new BufferedWriter(new FileWriter(userFile, true));
+    		ArrayList<String> addValues = new ArrayList<String>();
+    		
+    		for(String value: getUsers()){
+    			if(value.contains(player.getUsername())){
+    				addValues.add("" + player.getUsername() + ":" + player.getPassword() + ":" + player.getScore() + ":" + player.getTimesFooledOthers() + ":" +player.getTimesFooledByOther() + ":" + player.getCookie());
+    			} else {
+    				addValues.add(value);
+    			}
+    		}
+    		out.write("");
+    		for(String value : addValues){
+    			out.append(value);
+    			out.newLine();
+    		}
+    	} catch(IOException e){
+    		throw e;
+    	}
+    }
 
     public static String addSuggestion(String username, String gameToken, String suggestion, ClientHandler clientHandler) throws IOException {
         if(username == null || gameToken == null || suggestion == null){
