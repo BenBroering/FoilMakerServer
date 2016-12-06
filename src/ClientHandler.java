@@ -151,7 +151,7 @@ public class ClientHandler implements Runnable{
             }
 
         }catch (IOException e){
-            System.out.println("IO ERROR in ClientHandler run() method.");
+            e.printStackTrace();
         }
     }
 

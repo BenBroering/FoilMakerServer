@@ -19,6 +19,18 @@ public class FoilMakerServer{
          *
          * We may keep a list of the connections later.
          */
+
+        if(args.length != 2){
+            System.out.println("Incorrect Arguments: [user file path] [wordledeck file path]");
+            System.exit(1);
+        } else if(args[0] == null || args[1] == null){
+                System.out.println("args are null");
+                System.exit(1);
+        } else{
+            IOUtility.setUserFile(new File(args[0]));
+            IOUtility.setWordFile(new File(args[1]));
+        }
+
         ServerSocket listener = new ServerSocket(9999);
         while(true) {
             System.out.println("Waiting for a connection...");

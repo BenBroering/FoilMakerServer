@@ -13,15 +13,21 @@ import java.util.Random;
 public class IOUtility {
 	/*private static File userFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserDatabase");
     private static File wordFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\WordleDeck");
-    private static File userKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserTokenData");
-    private static File gameKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\GameTokenData");*/
-	private static File userFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
-    private static File wordFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
-    private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
-    private static File gameKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\GameTokenData");
+    private static File userKeyFile = new File("C:\\Users\\Noah\\Desktop\\FoilMaker\\UserTokenData");*/
+	private static File userFile; //new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserDatabase");
+    private static File wordFile; //new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\WordleDeck");
+    //private static File userKeyFile = new File("C:\\Users\\Ben\\Desktop\\foilmaker_server\\UserKeyData");
 
     private static BufferedReader in = null;
     private static BufferedWriter out = null;
+
+    public static void setUserFile(File userFile) {
+        IOUtility.userFile = userFile;
+    }
+
+    public static void setWordFile(File wordFile) {
+        IOUtility.wordFile = wordFile;
+    }
 
     public static ArrayList<String> getWords() throws IOException{
         try{
@@ -207,9 +213,6 @@ public class IOUtility {
                 String cookie = generateCookie();
                 String userInfo = loginAttempt + ":" + cookie;
                 clientHandler.setUserInfo(userInfo);
-                out = new BufferedWriter(new FileWriter(userKeyFile, true));
-                out.append("\n" + username + ":" + cookie);
-                out.flush();
                 FoilMakerServer.userLogin(userInfo);
                 return "RESPONSE--LOGIN--SUCCESS--" + cookie;
             }else {
@@ -299,6 +302,7 @@ public class IOUtility {
                     player.setExpectedNumAnswers(game.size());
                     player.setWordsLeft(words);
                 }
+                return;
             }
     	} catch(Exception e){
     		e.printStackTrace();
@@ -351,33 +355,38 @@ public class IOUtility {
         for (ClientHandler player : game) {
             PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
             sendOut.println(bigMsg);
-            //IOUtility.sendWord(gameKey);
         }
+        IOUtility.sendWord(gameKey);
+        //updateScore(game);
 
     }
     
-    public static void updateScore(ClientHandler player) throws IOException{
-    	try{
-    		//
-    		in = new BufferedReader(new FileReader(userFile));
-    		out = new BufferedWriter(new FileWriter(userFile, true));
-    		ArrayList<String> addValues = new ArrayList<String>();
-    		
-    		for(String value: getUsers()){
-    			if(value.contains(player.getUsername())){
-    				addValues.add("" + player.getUsername() + ":" + player.getPassword() + ":" + player.getScore() + ":" + player.getTimesFooledOthers() + ":" +player.getTimesFooledByOther() + ":" + player.getCookie());
-    			} else {
-    				addValues.add(value);
-    			}
-    		}
-    		out.write("");
-    		for(String value : addValues){
-    			out.append(value);
-    			out.newLine();
-    		}
-    	} catch(IOException e){
-    		throw e;
-    	}
+    public static void updateScore(ArrayList<ClientHandler> players) throws IOException{
+        for(ClientHandler player : players) {
+            try {
+                //
+                in = new BufferedReader(new FileReader(userFile));
+                ArrayList<String> addValues = new ArrayList<String>();
+                addValues.add("" + player.getUsername() + ":" + player.getPassword() + ":" + player.getScore() + ":"
+                        + player.getTimesFooledOthers() + ":" + player.getTimesFooledByOther() + ":" + player.getCookie());
+                for (String value : getUsers()) {
+                    if (!value.contains(player.getUsername())) {
+                        System.out.println("HEy132456");
+                        addValues.add(value);
+                    }
+                }
+                in.close();
+                out = new BufferedWriter(new FileWriter(userFile, true));
+                out.write(" ");
+                for (String value : addValues) {
+                    out.newLine();
+                    out.append(value);
+                    out.flush();
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+        }
     }
 
     public static String addSuggestion(String username, String gameToken, String suggestion, ClientHandler clientHandler) throws IOException {
