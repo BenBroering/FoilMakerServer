@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -384,7 +386,7 @@ public class IOUtility {
             while (!(listOfAnswers.size() <= 0)){
                 System.out.println(listOfAnswers.size());
                 int randValue = (int)(Math.random()*listOfAnswers.size());
-                if(randValue == listOfAnswers.size()-1){
+                if(listOfAnswers.get(randValue).equals(game.get(0).getRightAnswer().split(":")[1])){
                     playerAnswers += "" + listOfAnswers.get(randValue) + "--";
                     listOfAnswers.remove(randValue);
                 }else{
@@ -398,6 +400,7 @@ public class IOUtility {
                 String roundOptions = ("ROUNDOPTIONS--" + playerAnswers);
                 out.println(roundOptions.substring(0,roundOptions.length()-2));
             }
+            IOUtility.sendWord(gameToken);
         }
         return null;
     }

@@ -80,9 +80,8 @@ public class ClientHandler implements Runnable{
                 }
 
                 if(messageType.equals("LOGOUT")){
-                    FoilMakerServer.userLogout(userInfo);
-
-                    //out.println(returnMessage);
+                    returnMessage = FoilMakerServer.userLogout(userInfo);
+                    out.println(returnMessage);
                 }
 
                 if(messageType.equals("STARTNEWGAME")){

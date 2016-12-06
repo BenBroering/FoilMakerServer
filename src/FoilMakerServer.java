@@ -46,12 +46,13 @@ public class FoilMakerServer{
     public static void userLogin(String userInfo){
         loggedInUsers.add(userInfo);
     }
-    public static void userLogout(String userInfo){
+    public static String userLogout(String userInfo){
         for(String user : loggedInUsers){
             if(user.contains(userInfo)){
                 loggedInUsers.remove(userInfo);
-                return;
+                return "RESPONSE--LOGOUT--SUCCESS";
             }
         }
+        return "RESPONSE--LOGOUT--USERNOTLOGGEDIN";
     }
 }
