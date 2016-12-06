@@ -358,6 +358,7 @@ public class IOUtility {
     
     public static void updateScore(ClientHandler player) throws IOException{
     	try{
+    		//
     		in = new BufferedReader(new FileReader(userFile));
     		out = new BufferedWriter(new FileWriter(userFile, true));
     		ArrayList<String> addValues = new ArrayList<String>();
