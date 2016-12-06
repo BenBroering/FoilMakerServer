@@ -314,7 +314,7 @@ public class IOUtility {
     	String playerMsg = "";
     	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
     	for(ClientHandler player: game){
-    		playerMsg = player.getUsername() + "--";
+    		playerMsg = player.getUsername();
     		String playerMsgX = "";
     		String playerMsgY = "";
     		System.out.println("Player choice was " + player.getPlayerChoice());
