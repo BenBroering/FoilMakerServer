@@ -269,33 +269,41 @@ public class IOUtility {
 
     	try {
             ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
-            ArrayList<String> words = new ArrayList<>();
-            words.addAll(game.get(0).getWordsLeft());
-            //TODO
-            // Random
-            String word = words.get((int)(Math.random()*words.size()));
-            words.remove(word);
-            String[] questionAnswer = word.split(":");
-            returnMessage = "NEWGAMEWORD--" + questionAnswer[0] + "--" + questionAnswer[1];
-            System.out.println(returnMessage);
-            for(ClientHandler player: game){
-                PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
-                sendOut.println(returnMessage);
-            }
+            if(game.get(0).getWordsLeft().isEmpty()){
+                returnMessage = "GAMEOVER--";
+                for (ClientHandler player : game) {
+                    PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
+                    sendOut.println(returnMessage);
+                }
+            } else {
+                ArrayList<String> words = new ArrayList<>();
+                words.addAll(game.get(0).getWordsLeft());
+                //TODO
+                // Random
+                String word = words.get((int) (Math.random() * words.size()));
+                words.remove(word);
+                String[] questionAnswer = word.split(":");
+                returnMessage = "NEWGAMEWORD--" + questionAnswer[0] + "--" + questionAnswer[1];
+                System.out.println(returnMessage);
+                for (ClientHandler player : game) {
+                    PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
+                    sendOut.println(returnMessage);
+                }
 
-            setRightAnswerToPlayers(questionAnswer[1], game);
-            for(ClientHandler player : game){
-                player.setRightAnswer(word);
-                player.setAnswersGiven(0);
-                player.setExpectedNumAnswers(game.size());
-                player.setWordsLeft(words);
+                setRightAnswerToPlayers(questionAnswer[1], game);
+                for (ClientHandler player : game) {
+                    player.setRightAnswer(word);
+                    player.setAnswersGiven(0);
+                    player.setExpectedNumAnswers(game.size());
+                    player.setWordsLeft(words);
+                }
             }
     	} catch(Exception e){
     		e.printStackTrace();
     	}
     }
     
-    public static void sendRoundScore(String gameKey){
+    public static void sendRoundScore(String gameKey) throws IOException {
     	String bigMsg = FoilMakerNetworkProtocol.MSG_TYPE.ROUNDRESULT + "--";
     	String playerMsg = "";
     	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
@@ -337,8 +345,12 @@ public class IOUtility {
     	}
     	bigMsg = bigMsg.substring(0, bigMsg.length()-2);
     	System.out.println(bigMsg);
-    	
-    	sendMessageToAllPlayers(bigMsg,game);
+
+        for (ClientHandler player : game) {
+            PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
+            sendOut.println(bigMsg);
+            IOUtility.sendWord(gameKey);
+        }
     	
     }
 
@@ -415,23 +427,6 @@ public class IOUtility {
             sendRoundScore(gameToken);
         }
         return null;
-    }
-
-    private static void sendMessageToAllPlayers(String message, ArrayList<ClientHandler> players){
-    	if(players==null||message==null||players.size()==0){
-    		return;
-    	}
-
-    	for(ClientHandler player: players){
-            try {
-                PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
-                sendOut.println(message);
-                sendOut.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-    	}
     }
 
     private static void setRightAnswerToPlayers(String answer, ArrayList<ClientHandler> players){
