@@ -337,6 +337,51 @@ public class IOUtility {
     		e.printStackTrace();
     	}
     }
+    
+    public static void sendRoundScore(String gameKey){
+    	String bigMsg = FoilMakerNetworkProtocol.MSG_TYPE.ROUNDRESULT + "--";
+    	String playerMsg = "";
+    	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
+    	for(ClientHandler player: game){
+    		playerMsg = player.getUsername() + "--";
+    		String playerMsgX = "";
+    		String playerMsgY = "";
+    		if(player.getPlayerChoice().equals(player.getRightAnswer())){
+    			player.increaseScore(10);
+    			playerMsgX += "You got it right!";
+    		} else {
+    			for(ClientHandler playerX: game){
+    				if(playerX!=player&&playerX.getPlayerAnswer().equals(player.getPlayerChoice())){
+    					playerMsgY += "You were fooled by " + player.getUsername();
+    					player.incrementTimesFooledByOther();
+    					break;
+    				}
+    			}
+    		}
+    		//Check if player fooled others
+    		for(ClientHandler playerX: game){
+				if(playerX!=player&&player.getPlayerAnswer().equals(playerX.getPlayerChoice())){
+					player.increaseScore(5);
+					player.incrementTimesFooledOthers();
+					playerMsgX += "You fooled " + player.getUsername() + ".";
+				}
+			}
+    		if(playerMsgX.length()>0){
+    			playerMsg += playerMsgX + "--";
+    		}
+    		if(playerMsgY.length()>0){
+    			playerMsg += playerMsgY + "--";
+    		}
+    		playerMsg += player.getScore() + "--" + player.getTimesFooledOthers() + "--" + player.getTimesFooledByOther() + "--";
+    		bigMsg += playerMsg;
+    		
+    	}
+    	bigMsg = bigMsg.substring(0, bigMsg.length()-2);
+    	System.out.println(bigMsg);
+    	
+    	sendMessageToAllPlayers(bigMsg,game);
+    	
+    }
 
     private static void sendMessageToAllPlayers(String message, ArrayList<ClientHandler> players){
     	if(players==null||message==null||players.size()==0){

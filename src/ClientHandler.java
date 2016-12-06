@@ -203,4 +203,28 @@ public class ClientHandler implements Runnable{
     public ArrayList<String> getWordsLeft() {
         return wordsLeft;
     }
+    
+    public String getPlayerChoice(){
+    	return this.playerChoice;
+    }
+    
+    public String getPlayerAnswer(){
+    	return this.playerAnswer;
+    }
+    
+    public String getRightAnswer(){
+    	return this.rightAnswer;
+    }
+    
+    public void increaseScore(int amount){
+    	this.score += amount;
+    }
+    
+    public void incrementTimesFooledOthers(){
+    	this.timesFooledOthers++;
+    }
+    
+    public void incrementTimesFooledByOther(){
+    	this.timesFooledByOther++;
+    }
 }
