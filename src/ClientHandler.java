@@ -20,6 +20,7 @@ public class ClientHandler implements Runnable{
     private String playerChoice;
     private ArrayList<String> wordsLeft;
     private int answersGiven;
+    private int choicesGiven;
     private int expectedNumAnswers;
 
     public ClientHandler(Socket socket){
@@ -139,6 +140,15 @@ public class ClientHandler implements Runnable{
                     if(returnMessage != null)
                         out.println(returnMessage);
                 }
+                
+                if(messageType.equals("PLAYERCHOICE")){
+                    if(tokens.length != 3){
+                        out.println("RESPONSE-­PLAYERCHOICE--INVALIDMESSAGEFORMAT");
+                    }
+                    returnMessage = IOUtility.addChoice(tokens[0], tokens[1], tokens[2], this);
+                    if(returnMessage != null)
+                        out.println(returnMessage);
+                }
             }
 
         }catch (IOException e){
@@ -187,6 +197,10 @@ public class ClientHandler implements Runnable{
     public int getAnswersGiven() {
         return answersGiven;
     }
+    
+    public int getChoicesGiven(){
+    	return this.getChoicesGiven();
+    }
 
     public int getExpectedNumAnswers() {
         return expectedNumAnswers;
@@ -222,6 +236,10 @@ public class ClientHandler implements Runnable{
 
     public void setAnswersGiven(int answersGiven) {
         this.answersGiven = answersGiven;
+    }
+    
+    public void setChoicesGiven(int choiceGiven){
+    	this.choicesGiven = choiceGiven;
     }
 
     public void setExpectedNumAnswers(int expectedNumAnswers) {

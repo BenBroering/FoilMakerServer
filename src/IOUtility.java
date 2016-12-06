@@ -402,4 +402,31 @@ public class IOUtility {
         }
         return null;
     }
+    
+    public static String addChoice(String username, String gameToken, String choice, ClientHandler clientHandler) throws IOException {
+        if(username == null || gameToken == null || choice == null){
+            return "RESPONSE--PLAYERCHOICE--INVALIDMESSAGEFORMAT";
+        }
+        if(!FoilMakerServer.getActiveGames().containsKey(gameToken)){
+            return "RESPONSE--PLAYERCHOICE--INVALIDGAMETOKEN";
+        }
+        if(!FoilMakerServer.getActiveGames().get(gameToken).contains(clientHandler)){
+            return "RESPONSE--PLAYERCHOICE--USERNOTLOGGEDIN";
+        }
+
+        //return "RESPONSE--PLAYERSUGGESTION--UNEXPECTEDMESSAGETYPE";
+
+        if(choice.trim().equals(""))
+            return "RESPONSE--PLAYERCHOICE--INVALIDMESSAGEFORMAT";
+
+        ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameToken);
+        clientHandler.setPlayerChoice(choice);
+        for(ClientHandler player : game){
+            player.setChoicesGiven(player.getChoicesGiven()+1);
+        }
+        if(clientHandler.getChoicesGiven() >= clientHandler.getExpectedNumAnswers()){
+        	sendRoundScore(gameToken);
+        }
+        return null;
+    }
 }
