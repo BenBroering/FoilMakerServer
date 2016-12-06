@@ -199,7 +199,7 @@ public class ClientHandler implements Runnable{
     }
     
     public int getChoicesGiven(){
-    	return this.getChoicesGiven();
+    	return this.choicesGiven;
     }
 
     public int getExpectedNumAnswers() {

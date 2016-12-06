@@ -340,33 +340,6 @@ public class IOUtility {
     	
     }
 
-    private static void sendMessageToAllPlayers(String message, ArrayList<ClientHandler> players){
-    	if(players==null||message==null||players.size()==0){
-    		return;
-    	}
-
-    	for(ClientHandler player: players){
-            try {
-                PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
-                sendOut.println(message);
-                sendOut.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-    	}
-    }
-
-    
-    private static void setRightAnswerToPlayers(String answer, ArrayList<ClientHandler> players){
-    	if(players==null||answer==null||players.size()==0){
-    		return;
-    	}
-    	for(ClientHandler player: players){
-    		player.setRightAnswer(answer);
-    	}
-    }
-
     public static String addSuggestion(String username, String gameToken, String suggestion, ClientHandler clientHandler) throws IOException {
         if(username == null || gameToken == null || suggestion == null){
             return "RESPONSE--PLAYERSUGGESTION--INVALIDMESSAGEFORMAT";
@@ -414,7 +387,7 @@ public class IOUtility {
         }
         return null;
     }
-    
+
     public static String addChoice(String username, String gameToken, String choice, ClientHandler clientHandler) throws IOException {
         if(username == null || gameToken == null || choice == null){
             return "RESPONSE--PLAYERCHOICE--INVALIDMESSAGEFORMAT";
@@ -437,8 +410,34 @@ public class IOUtility {
             player.setChoicesGiven(player.getChoicesGiven()+1);
         }
         if(clientHandler.getChoicesGiven() >= clientHandler.getExpectedNumAnswers()){
-        	sendRoundScore(gameToken);
+            sendRoundScore(gameToken);
         }
         return null;
+    }
+
+    private static void sendMessageToAllPlayers(String message, ArrayList<ClientHandler> players){
+    	if(players==null||message==null||players.size()==0){
+    		return;
+    	}
+
+    	for(ClientHandler player: players){
+            try {
+                PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
+                sendOut.println(message);
+                sendOut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    	}
+    }
+
+    private static void setRightAnswerToPlayers(String answer, ArrayList<ClientHandler> players){
+    	if(players==null||answer==null||players.size()==0){
+    		return;
+    	}
+    	for(ClientHandler player: players){
+    		player.setRightAnswer(answer);
+    	}
     }
 }
