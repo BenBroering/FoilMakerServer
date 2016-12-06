@@ -24,7 +24,7 @@
       <file leaf-file-name="FoilMakerServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
+            <state relative-caret-position="880">
               <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
               <folding />
             </state>
@@ -35,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1246">
-              <caret line="124" column="62" selection-start-line="124" selection-start-column="62" selection-end-line="124" selection-end-column="62" />
+              <caret line="136" column="21" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
               <folding>
                 <element signature="e#6204#6205#0" expanded="true" />
                 <element signature="e#6239#6240#0" expanded="true" />
@@ -59,6 +59,12 @@
                 <element signature="e#7175#7176#0" expanded="true" />
                 <element signature="e#7222#7223#0" expanded="true" />
                 <element signature="e#7254#7255#0" expanded="true" />
+                <element signature="e#7302#7303#0" expanded="true" />
+                <element signature="e#7335#7336#0" expanded="true" />
+                <element signature="e#7386#7387#0" expanded="true" />
+                <element signature="e#7423#7424#0" expanded="true" />
+                <element signature="e#7475#7476#0" expanded="true" />
+                <element signature="e#7513#7514#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,8 +73,8 @@
       <file leaf-file-name="IOUtility.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="304" column="9" selection-start-line="304" selection-start-column="9" selection-end-line="304" selection-end-column="9" />
+            <state relative-caret-position="166">
+              <caret line="394" column="71" selection-start-line="394" selection-start-column="71" selection-end-line="394" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,6 +119,13 @@
         <option value="$PROJECT_DIR$/src/ClientHandler.java" />
         <option value="$PROJECT_DIR$/src/IOUtility.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -532,315 +545,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2508">
-          <caret line="120" column="44" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
-          <folding>
-            <element signature="e#6204#6205#0" expanded="true" />
-            <element signature="e#6239#6240#0" expanded="true" />
-            <element signature="e#6281#6282#0" expanded="true" />
-            <element signature="e#6322#6323#0" expanded="true" />
-            <element signature="e#6360#6361#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-            <element signature="e#6433#6434#0" expanded="true" />
-            <element signature="e#6468#6469#0" expanded="true" />
-            <element signature="e#6507#6508#0" expanded="true" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6694#6695#0" expanded="true" />
-            <element signature="e#6742#6743#0" expanded="true" />
-            <element signature="e#6798#6799#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6907#6908#0" expanded="true" />
-            <element signature="e#6949#6950#0" expanded="true" />
-            <element signature="e#7002#7003#0" expanded="true" />
-            <element signature="e#7050#7051#0" expanded="true" />
-            <element signature="e#7115#7116#0" expanded="true" />
-            <element signature="e#7175#7176#0" expanded="true" />
-            <element signature="e#7222#7223#0" expanded="true" />
-            <element signature="e#7254#7255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
-          <folding>
-            <element signature="e#6204#6205#0" expanded="true" />
-            <element signature="e#6239#6240#0" expanded="true" />
-            <element signature="e#6281#6282#0" expanded="true" />
-            <element signature="e#6322#6323#0" expanded="true" />
-            <element signature="e#6360#6361#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-            <element signature="e#6433#6434#0" expanded="true" />
-            <element signature="e#6468#6469#0" expanded="true" />
-            <element signature="e#6507#6508#0" expanded="true" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6694#6695#0" expanded="true" />
-            <element signature="e#6742#6743#0" expanded="true" />
-            <element signature="e#6798#6799#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6907#6908#0" expanded="true" />
-            <element signature="e#6949#6950#0" expanded="true" />
-            <element signature="e#7002#7003#0" expanded="true" />
-            <element signature="e#7050#7051#0" expanded="true" />
-            <element signature="e#7115#7116#0" expanded="true" />
-            <element signature="e#7175#7176#0" expanded="true" />
-            <element signature="e#7222#7223#0" expanded="true" />
-            <element signature="e#7254#7255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="108" column="71" selection-start-line="108" selection-start-column="71" selection-end-line="108" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#6204#6205#0" expanded="true" />
-            <element signature="e#6239#6240#0" expanded="true" />
-            <element signature="e#6281#6282#0" expanded="true" />
-            <element signature="e#6322#6323#0" expanded="true" />
-            <element signature="e#6360#6361#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-            <element signature="e#6433#6434#0" expanded="true" />
-            <element signature="e#6468#6469#0" expanded="true" />
-            <element signature="e#6507#6508#0" expanded="true" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6694#6695#0" expanded="true" />
-            <element signature="e#6742#6743#0" expanded="true" />
-            <element signature="e#6798#6799#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6907#6908#0" expanded="true" />
-            <element signature="e#6949#6950#0" expanded="true" />
-            <element signature="e#7002#7003#0" expanded="true" />
-            <element signature="e#7050#7051#0" expanded="true" />
-            <element signature="e#7115#7116#0" expanded="true" />
-            <element signature="e#7175#7176#0" expanded="true" />
-            <element signature="e#7222#7223#0" expanded="true" />
-            <element signature="e#7254#7255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1474">
-          <caret line="85" column="32" selection-start-line="85" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#6204#6205#0" expanded="true" />
-            <element signature="e#6239#6240#0" expanded="true" />
-            <element signature="e#6281#6282#0" expanded="true" />
-            <element signature="e#6322#6323#0" expanded="true" />
-            <element signature="e#6360#6361#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-            <element signature="e#6433#6434#0" expanded="true" />
-            <element signature="e#6468#6469#0" expanded="true" />
-            <element signature="e#6507#6508#0" expanded="true" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6694#6695#0" expanded="true" />
-            <element signature="e#6742#6743#0" expanded="true" />
-            <element signature="e#6798#6799#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6907#6908#0" expanded="true" />
-            <element signature="e#6949#6950#0" expanded="true" />
-            <element signature="e#7002#7003#0" expanded="true" />
-            <element signature="e#7050#7051#0" expanded="true" />
-            <element signature="e#7115#7116#0" expanded="true" />
-            <element signature="e#7175#7176#0" expanded="true" />
-            <element signature="e#7222#7223#0" expanded="true" />
-            <element signature="e#7254#7255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="28" column="67" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
-          <folding>
-            <element signature="e#6204#6205#0" expanded="true" />
-            <element signature="e#6239#6240#0" expanded="true" />
-            <element signature="e#6281#6282#0" expanded="true" />
-            <element signature="e#6322#6323#0" expanded="true" />
-            <element signature="e#6360#6361#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-            <element signature="e#6433#6434#0" expanded="true" />
-            <element signature="e#6468#6469#0" expanded="true" />
-            <element signature="e#6507#6508#0" expanded="true" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6694#6695#0" expanded="true" />
-            <element signature="e#6742#6743#0" expanded="true" />
-            <element signature="e#6798#6799#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6907#6908#0" expanded="true" />
-            <element signature="e#6949#6950#0" expanded="true" />
-            <element signature="e#7002#7003#0" expanded="true" />
-            <element signature="e#7050#7051#0" expanded="true" />
-            <element signature="e#7115#7116#0" expanded="true" />
-            <element signature="e#7175#7176#0" expanded="true" />
-            <element signature="e#7222#7223#0" expanded="true" />
-            <element signature="e#7254#7255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
           <folding />
@@ -874,6 +578,12 @@
             <element signature="e#7175#7176#0" expanded="true" />
             <element signature="e#7222#7223#0" expanded="true" />
             <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -971,14 +681,468 @@
             <element signature="e#7175#7176#0" expanded="true" />
             <element signature="e#7222#7223#0" expanded="true" />
             <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="304" column="9" selection-start-line="304" selection-start-column="9" selection-end-line="304" selection-end-column="9" />
+        <state relative-caret-position="264">
+          <caret line="330" column="14" selection-start-line="330" selection-start-column="14" selection-end-line="330" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1078">
+          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2508">
+          <caret line="120" column="44" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="108" column="71" selection-start-line="108" selection-start-column="71" selection-end-line="108" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1474">
+          <caret line="85" column="32" selection-start-line="85" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="28" column="67" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="28" column="67" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerFunctions.java" />
+    <entry file="file://$PROJECT_DIR$/src/Messages.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/net/Socket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="902" column="0" selection-start-line="902" selection-start-column="0" selection-end-line="902" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameState.java" />
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerNetworkProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="880">
+          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1246">
+          <caret line="136" column="21" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
+          <folding>
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6281#6282#0" expanded="true" />
+            <element signature="e#6322#6323#0" expanded="true" />
+            <element signature="e#6360#6361#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6433#6434#0" expanded="true" />
+            <element signature="e#6468#6469#0" expanded="true" />
+            <element signature="e#6507#6508#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6694#6695#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6846#6847#0" expanded="true" />
+            <element signature="e#6907#6908#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7050#7051#0" expanded="true" />
+            <element signature="e#7115#7116#0" expanded="true" />
+            <element signature="e#7175#7176#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+            <element signature="e#7254#7255#0" expanded="true" />
+            <element signature="e#7302#7303#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#7386#7387#0" expanded="true" />
+            <element signature="e#7423#7424#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7513#7514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IOUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="394" column="71" selection-start-line="394" selection-start-column="71" selection-end-line="394" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

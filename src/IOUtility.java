@@ -273,8 +273,7 @@ public class IOUtility {
             words.addAll(game.get(0).getWordsLeft());
             //TODO
             // Random
-            Random r = new Random();
-            String word = words.get(0);
+            String word = words.get((int)(Math.random()*words.size()));
             words.remove(word);
             String[] questionAnswer = word.split(":");
             returnMessage = "NEWGAMEWORD--" + questionAnswer[0] + "--" + questionAnswer[1];
@@ -386,13 +385,26 @@ public class IOUtility {
 
         ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameToken);
         clientHandler.setPlayerAnswer(suggestion);
+        ArrayList<String> listOfAnswers = new ArrayList<>();
         for(ClientHandler player : game){
             player.setAnswersGiven(player.getAnswersGiven()+1);
+            listOfAnswers.add(player.getPlayerAnswer());
         }
+
         if(clientHandler.getAnswersGiven() >= clientHandler.getExpectedNumAnswers()){
+            listOfAnswers.add(game.get(0).getRightAnswer().split(":")[1]);
             String playerAnswers = "";
-            for(ClientHandler player : game){
-                playerAnswers += "" + player.getPlayerAnswer() + "--";
+            while (!(listOfAnswers.size() <= 0)){
+                System.out.println(listOfAnswers.size());
+                int randValue = (int)(Math.random()*listOfAnswers.size());
+                if(randValue == listOfAnswers.size()-1){
+                    playerAnswers += "" + listOfAnswers.get(randValue) + "--";
+                    listOfAnswers.remove(randValue);
+                }else{
+                    String playerAnswer = game.get(randValue).getPlayerAnswer();
+                    playerAnswers += "" + playerAnswer + "--";
+                    listOfAnswers.remove(randValue);
+                }
             }
             for(ClientHandler playerToSendMessage : game){
                 PrintWriter out = new PrintWriter(playerToSendMessage.getSocket().getOutputStream(), true);
