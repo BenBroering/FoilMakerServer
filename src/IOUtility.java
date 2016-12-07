@@ -1,5 +1,3 @@
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -314,11 +312,11 @@ public class IOUtility {
     	String playerMsg = "";
     	ArrayList<ClientHandler> game = FoilMakerServer.getActiveGames().get(gameKey);
     	for(ClientHandler player: game){
-    		playerMsg = player.getUsername();
+    		playerMsg = player.getUsername()+  "--";
     		String playerMsgX = "";
     		String playerMsgY = "";
     		System.out.println("Player choice was " + player.getPlayerChoice());
-    		System.out.println("Right answer was " + player.getRightAnswer());
+    		System.out.println("Right answer was " + player.getRightAnswer().split(":")[1]);
     		if(player.getPlayerChoice().equals(player.getRightAnswer().split(":")[1])){
     			player.increaseScore(10);
     			playerMsgX += "You got it right!";
@@ -356,7 +354,7 @@ public class IOUtility {
             PrintWriter sendOut = new PrintWriter(player.getSocket().getOutputStream(), true);
             sendOut.println(bigMsg);
         }
-        IOUtility.sendWord(gameKey);
+        //IOUtility.sendWord(gameKey);
         //updateScore(game);
 
     }
